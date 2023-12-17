@@ -1,0 +1,11 @@
+-- item_listing table seeds here (Example)
+INSERT INTO item_listing (title, description, price, image_url, is_available, user_id) VALUES ('Laptop', 'Brand new laptop with high-performance specifications', 999.99, 'https://example.com/laptop_image.jpg', true, 1);
+INSERT INTO item_listing (title, description, price, image_url, is_available, user_id) VALUES ('Smartphone', 'Latest model smartphone with advanced features', 599.99, 'https://example.com/phone_image.jpg', true, 2);
+INSERT INTO item_listing (title, description, price, image_url, is_available, user_id) VALUES ('Coffee Maker', 'Premium coffee maker for brewing delicious coffee', 79.99, 'https://example.com/coffee_maker_image.jpg', true, 3);
+INSERT INTO item_listing (title, description, price, image_url, is_available, user_id) VALUES ('Fitness Tracker', 'Water-resistant fitness tracker with heart rate monitor', 49.99, 'https://example.com/fitness_tracker_image.jpg', true, 1);
+INSERT INTO item_listing (title, description, price, image_url, is_available, user_id) VALUES ('Bluetooth Earbuds', 'Wireless Bluetooth earbuds for immersive audio experience', 29.99, 'https://example.com/earbuds_image.jpg', true, 4);
+INSERT INTO item_listing (title, description, price, image_url, is_available, user_id) VALUES ('Gaming Mouse', 'High-precision gaming mouse with customizable buttons', 39.99, 'https://example.com/gaming_mouse_image.jpg', true, 2);
+INSERT INTO item_listing (title, description, price, image_url, is_available, user_id) VALUES ('Bookshelf', 'Sturdy wooden bookshelf with multiple shelves', 129.99, 'https://example.com/bookshelf_image.jpg', true, 3);
+INSERT INTO item_listing (title, description, price, image_url, is_available, user_id) VALUES ('Smart Watch', 'Smartwatch with fitness tracking and notification feature', 89.99, 'https://example.com/smartwatch_image.jpg', true, 4);
+INSERT INTO item_listing (title, description, price, image_url, is_available, user_id) VALUES ('Portable Speaker', 'Compact portable speaker with Bluetooth connectivity', 59.99, 'https://example.com/speaker_image.jpg', true, 1);
+INSERT INTO item_listing (title, description, price, image_url, is_available, user_id) VALUES ('Desk Chair', 'Ergonomic desk chair for comfortable long hours of work', 149.99, 'https://example.com/desk_chair_image.jpg', true, 2);
