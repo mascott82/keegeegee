@@ -3,23 +3,6 @@ const router = express.Router();
 const users = require('../db/queries/users');
 const { getUsers, addUser, loginUser } = require('../db/queries/users')
 
-const generateRandomString = function() {
-  return Math.random().toString(36).substring(2, 8);
-}
-
-/* const addUser = (user) => {
-  return db.query(`INSERT INTO users (username, email, password, full_name, created_at)
-      VALUES ($1, $2, $3, $4, CURRENT_TIMESTAMP)`,
-  [user.username, user.email, user.password, user.full_name])
-    .then(() => {
-      console.log('User added successfully!');
-    })
-    .catch(error => {
-      console.error('Error adding user: ', error);
-      throw error;
-    });
-}; */
-
 router.get('/register', (req, res) => {
   res.render('register');
 });
@@ -29,7 +12,6 @@ router.post('/register', (req, res) => {
   const randomUserID = generateRandomString();
   const { username, email, password } = req.body;
   const newUser = {
-    id: randomUserID,
     username,
     email,
     password,
