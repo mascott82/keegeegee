@@ -40,11 +40,8 @@ const feedsRoutes = require('./routes/feeds');
 const favoritesRoutes = require('./routes/favorites');
 const searchRoutes = require('./routes/search');
 const searchApiRoutes = require('./routes/search-api');
-<<<<<<< HEAD
 const loginRoutes = require('./routes/login');
-=======
 const feedsApiRoutes = require('./routes/feeds-api');
->>>>>>> master
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -56,12 +53,9 @@ app.use('/f', feedsRoutes);
 app.use('/fav', favoritesRoutes);
 app.use('/s', searchRoutes);
 app.use('/api/search', searchApiRoutes);
-<<<<<<< HEAD
 app.use(loginRoutes);
-=======
 app.use('/api/feeds', feedsApiRoutes);
 
->>>>>>> master
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -77,3 +71,4 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+
