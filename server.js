@@ -6,6 +6,7 @@ const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser')
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -41,6 +42,7 @@ const favoritesRoutes = require('./routes/favorites');
 const searchRoutes = require('./routes/search');
 const searchApiRoutes = require('./routes/search-api');
 const loginRoutes = require('./routes/login');
+const registerRoutes = require('./routes/register');
 const feedsApiRoutes = require('./routes/feeds-api');
 
 // Mount all resource routes
@@ -54,6 +56,7 @@ app.use('/fav', favoritesRoutes);
 app.use('/s', searchRoutes);
 app.use('/api/search', searchApiRoutes);
 app.use(loginRoutes);
+app.use(registerRoutes);
 app.use('/api/feeds', feedsApiRoutes);
 
 // Note: mount other resources here, using the same pattern above

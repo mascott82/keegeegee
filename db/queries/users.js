@@ -32,4 +32,13 @@ const loginUser = (email, password) => {
     });
 };
 
-module.exports = { getUsers, addUser, loginUser };
+const getUserIDByEmail = (email, users) => {
+  for (let userID in users) {
+    if (users.email === email) {
+      return user.id;
+    }
+  }
+  return false;
+};
+
+module.exports = { getUsers, addUser, loginUser, getUserIDByEmail };

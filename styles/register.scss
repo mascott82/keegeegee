@@ -1,10 +1,10 @@
-.login-container {
+.register-container {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.login-left-page {
+.register-left-page {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,12 +17,18 @@
   text-align: center;
 }
 
-.login-right-page {
+.register-right-page {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem;
   width: 50vw;
+}
+
+.register-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
 .submit-btn {
@@ -35,13 +41,13 @@
   padding: 0.5rem;
 }
 
-.login-title {
+.register-title {
   width: 30vw;
   margin-top: 1rem;
   margin-bottom: 0.25rem;
 }
 
-.login-input {
+.register-input {
   width: 30vw;
   height: 2rem;
   background-color: #EDF2F7;
@@ -51,11 +57,6 @@
   margin-bottom: 0.5rem;
 }
 
-.register-link {
+.sign-in {
   font-weight: bold;
-}
-
-a:visited {
-  color: #141416;
-  text-decoration: none;
 }
