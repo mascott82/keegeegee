@@ -23,11 +23,11 @@ router.post("/", (req, res) => {
     res.redirect("/f/feeds")
   }
 
-/*   req.session.user_id = userInfo.id;
+  req.session.user_id = userInfo.id;
   console.log("userInfo.id", req.session.user_id)
 
   req.session.user_email = userInfo.email;
-  console.log("userInfo.email", req.session.user_email) */
+  console.log("userInfo.email", req.session.user_email)
 
   console.log("req.session", req.session)
 
