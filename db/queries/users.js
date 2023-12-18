@@ -8,8 +8,8 @@ const getUsers = () => {
 };
 
 const addUser = (user) => {
-  return db.query(`INSERT INTO users (username, email, password, full_name, created_at)
-      VALUES ($1, $2, $3, $4, CURRENT_TIMESTAMP)`,
+  return db.query(`INSERT INTO users (username, email, password, full_name)
+      VALUES ($1, $2, $3, $4)`,
   [user.username, user.email, user.password, user.full_name])
     .then(() => {
       console.log('User added successfully!');

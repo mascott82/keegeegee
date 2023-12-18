@@ -20,8 +20,8 @@ const getFavouritesByUser = (id) => {
 };
 
 const addFavourite = (favourite) => {
-  return db.query(`INSERT INTO favourites (user_id, item_listing_id, created_at)
-      VALUES ($1, $2, CURRENT_TIMESTAMP)`,
+  return db.query(`INSERT INTO favourites (user_id, item_listing_id)
+      VALUES ($1, $2)`,
   [favourite.userId, favourite.itemId])
     .then(() => {
       console.log('Favourite item added successfully!');

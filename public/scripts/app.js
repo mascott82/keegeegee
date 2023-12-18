@@ -12,6 +12,16 @@ $(function() {
 
       if (btnId.startsWith('fav_')) {
         console.log("fav");
+
+        $.post('/api/fav/:id', { feedId: feedId })
+          .done(function(res) {
+            if (res.message === 1) {
+              $('#sold_' + feedId).prop('disabled', true);
+            }
+          })
+          .fail(function(jqXHR, textStatus, errorThrown) {
+            console.error('Error:', errorThrown);
+          });
       }
 
       if (btnId.startsWith('msg_')) {

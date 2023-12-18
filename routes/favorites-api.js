@@ -12,8 +12,14 @@ const favs = require('../db/queries/favourites');
 
 router.post('/:id', (req, res) => {
   const feedId = req.body.feedId;
+  const userId = 1;
 
-  favs.addFavourite()
+  const favourite = {
+    itemId: feedId,
+    userId: userId
+  };
+
+  favs.addFavourite(favourite)
     .then(() => {
       console.log('Marked the feed successfully! ');
       res.send({ message: 1 });
