@@ -19,7 +19,6 @@ $(function() {
       }
 
       if (btnId.startsWith('sold_')) {
-        console.log("sold");
         $.post('/api/feeds/:id', { feedId: feedId })
           .done(function(res) {
             if (res.message === 1) {
