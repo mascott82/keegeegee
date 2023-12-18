@@ -19,15 +19,26 @@ $(function() {
       }
 
       if (btnId.startsWith('sold_')) {
-        console.log("sold");
+        $.post('/api/feeds/:id', { feedId: feedId })
+          .done(function(res) {
+            if (res.message === 1) {
+              $('#sold_' + feedId).prop('disabled', true);
+            }
+          })
+          .fail(function(jqXHR, textStatus, errorThrown) {
+            console.error('Error:', errorThrown);
+          });
       }
 
       if (btnId.startsWith('del_')) {
-        console.log("del");
-
         $.post('/api/feeds/:id/delete', { feedId: feedId })
-          .done(function(data) {
-            console.log(data);
+          .done(function(res) {
+            if (res.message === 1) {
+              $('#' + cardBoxId).slideUp();
+            }
+          })
+          .fail(function(jqXHR, textStatus, errorThrown) {
+            console.error('Error:', errorThrown);
           });
       }
 
