@@ -33,17 +33,17 @@
     </form>
     <div id="feedsList">
       <% for (let i = 0; i < feeds.length; i++) { %>
-        <div class="card mb-3">
+        <div class="card mb-3" id="cardbox_<%= feeds[i].id %>">
           <div class="card-body">
             <img src="<%= feeds[i].image_url %>" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title"><%= feeds[i].title %></h5>
               <p class="card-text"><%= feeds[i].description %></p>
-              <div id="btn-group" class="btn-group" role="group" aria-label="Basic example">
-                <a href="#" class="btn btn-success" id="isFavourite">Mark as my favourite</a>
-                <a href="#" class="btn btn-primary" id="msgBtn">Leave a message</a>
-                <a href="#" class="btn btn-warning" id="isSold">Mark as sold</a>
-                <a href="#" class="btn btn-danger" id="delBtn">Delete</a>
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-success" value="<%= feeds[i].id %>" id="fav_<%= feeds[i].id %>">Mark as my favourite</button>
+                <button type="button" class="btn btn-primary" value="<%= feeds[i].id %>" id="msg_<%= feeds[i].id %>">Leave a message</button>
+                <button type="button" class="btn btn-warning" value="<%= feeds[i].id %>" id="sold_<%= feeds[i].id %>">Mark as sold</button>
+                <button type="button" class="btn btn-danger" value="<%= feeds[i].id %>" id="del_<%= feeds[i].id %>">Delete</button>
               </div>
             </div>
           </div>

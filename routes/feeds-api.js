@@ -35,4 +35,19 @@ router.post('/new', (req, res) => {
     });
 });
 
+router.post('/:id/delete', (req, res) => {
+  console.log("DELETE");
+
+  const feedId = req.body.feedId;
+
+  feed.deleteFeed(feedId)
+    .then(() => {
+      console.log('Deleted the feed successfully! ');
+      res.send({code: 1});
+    })
+    .catch(error => {
+      console.error("Error deleting the feed. ", error);
+    });
+});
+
 module.exports = router;

@@ -8,6 +8,6 @@ CREATE TABLE item_listing (
   image_url VARCHAR(255),
   description TEXT,
   is_available BOOLEAN,
-  user_id INTEGER REFERENCES users(id),
-  created_at  TIMESTAMP
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCASE,
+  created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
