@@ -63,6 +63,39 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
+app.get('/favorites', (req, res) => {
+  let sortby = req.query.sortby;
+  let sortedFavorites;
+
+  let favorites = [
+    { title: 'Item 1', price: 100, date: new Date(2023, 12, 17), availability: 'Available' },
+    { title: 'Item 2', price: 200, date: new Date(2023, 12, 15), availability: 'Sold out' },
+    // ... other items ...
+  ];
+
+  switch (sortby) {
+  case 'price_asc':
+    sortedFavorites = favorites.sort((a, b) => a.price - b.price);
+    break;
+  case 'price_desc':
+    sortedFavorites = favorites.sort((a, b) => b.price - a.price);
+    break;
+  case 'date_asc':
+    sortedFavorites = favorites.sort((a, b) => a.date - b.date);
+    break;
+  case 'date_desc':
+    sortedFavorites = favorites.sort((a, b) => b.date - a.date);
+    break;
+  case 'availability':
+    sortedFavorites = favorites.filter(item => item.availability === 'Available');
+    break;
+  default:
+    sortedFavorites = favorites;
+  }
+
+  res.render('favorites', { favorites: sortedFavorites });
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
