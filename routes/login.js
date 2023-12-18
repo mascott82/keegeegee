@@ -9,28 +9,23 @@ router.get('/', (req, res) => {
 
 router.post("/", (req, res) => {
   const { email, password } = req.body;
-  console.log({ email, password })
-
-  const userInfo = users.loginUser(email, password);
+  // console.log("EMAIL & PASSWORD: ", { email, password })
 
   if (!email || !password) {
     return res.status(400).send("Error: email and password is required");
   }
 
-  if (!userInfo) {
-    return res.status(403).send("No account associated with that email was found.");
-  } else {
-    res.redirect("/f/feeds")
-  }
-
-  req.session.user_id = userInfo.id;
-  console.log("userInfo.id", req.session.user_id)
-
-  req.session.user_email = userInfo.email;
-  console.log("userInfo.email", req.session.user_email)
-
-  console.log("req.session", req.session)
-
+  const userInfo = users.loginUser(email, password)
+  .then((data) => {
+      if (data.length === 0) {
+        return res.status(403).send("Email or password is incorrect. Please try again.");
+      }
+      console.log('User logon successfully!');
+      res.redirect("/f/feeds")
+    })
+    .catch(error => {
+      console.error('Error searching user: ', error);
+    });
 })
 
 

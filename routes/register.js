@@ -40,8 +40,8 @@ router.post('/register', (req, res) => {
   }
 
   users[newUser.id] = newUser;
-  res.cookie("user_id", randomUserID);
-  res.cookie("user_email", email);
+  res.session("user_id", randomUserID);
+  res.session("user_email", email);
 
   console.log(newUser)
 
