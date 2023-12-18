@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Keegeegee - My Favorites</title>
+
+  <meta charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" />
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/layout.css" />
+
+  <script src="/vendor/jquery-3.0.0.js"></script>
+  <script defer src="/scripts/app.js"></script>
+
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+    .container {
+      width: 80%;
+      margin: 0 auto;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+    }
+
+    .header {
+      display: flex;
+      text-align: center;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 30px;
+    }
+
+    .header h1 {
+      flex-grow: 1;
+      text-align: center;
+      color: black;
+    }
+
+    select {
+      margin-left: auto; /* This will push 'sort by' drop-box to the right */
+      color: gray;
+      padding: 3px;
+      border: 1px solid #ccc;
+    }
+    .card {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin: 10px 0px;
+      padding: 15px;
+      background-color: white;
+      overflow: hidden;
+    }
+    .card-image-container {
+      width: 30%;
+      background-color: #696460;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-image {
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+    }
+    .card-info-container {
+      flex-grow: 1;
+      background-color: #e3deda;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-info {
+      padding: 10px;
+      background-color: #f2ede9;
+      margin: 5px;
+    }
+
+    .title-status {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .description {
+      flex-grow: 1;
+    }
+
+    .date-icons {
+      font-size: small;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      color: gray;
+    }
+
+    .icons {
+
+    }
+
+    .status {
+      font-size: 0.8em;
+      padding: 2px 8px;
+      border-radius: 5px;
+      color: white;
+      text-transform: capitalize; /* Capitalize the status text */
+    }
+
+    .status.sold {
+      background-color: #d9534f; /* Red color for 'sold' status */
+    }
+
+    .status.available {
+      background-color: #5cb85c; /* Green color for 'available' status */
+    }
+
+    .btn-load-more {
+      display: block;
+      width: 20%;
+      padding: 10px;
+      margin-top: 20px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 20px;
+      text-align: center;
+      background-color: #f8f8f8;
+      border: 2px solid #ccc;
+      cursor: pointer;
+      border-radius: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>My Favorites</h1>
+      <form id="sortForm">
+        <select name="sortby" onchange="document.getElementById('sortForm').submit();">
+          <option value="default">Sort By</option>
+          <option value="price_asc">Price: Low to High</option>
+          <option value="price_desc">Price: High to Low</option>
+          <option value="date_asc">Date: Old to New</option>
+          <option value="date_desc">Date: New to Old</option>
+          <option value="availability">Availability</option>
+        </select>
+      </form>
+    </div>
+
+    <% favorites.forEach(function(item) { %>
+      <div class="card">
+        <div class="card-image-container">
+          <img src="<%= item.imageUrl %>" alt="Item image" class="card-image">
+        </div>
+        <div class="card-info-container">
+          <div class="card-info title-status">
+            <h5><%= item.title %></h5>
+            <% if(item.status) { %>
+              <span class="status <%= item.status.toLowerCase() %>"><%= item.status %></span>
+            <% } else { %>
+              <span class="status">No Status</span>
+            <% } %>
+          </div>
+          <div class="card-info description">
+            <p><%= item.description %></p>
+          </div>
+          <div class="card-info date-icons">
+            <span><%= item.date %></span>
+            <div class="icons">
+              <!-- Add icon elements here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    <% }); %>
+
+    <button class="btn-load-more">Load more</button>
+  </div>
+  <script>
+    // This script will submit the form when you change the selection.
+    // Actual sorting logic will be handled server-side.
+    document.getElementById('sortForm').addEventListener('change', function() {
+      this.submit();
+    });
+  </script>
+
+</body>
+
+</html>

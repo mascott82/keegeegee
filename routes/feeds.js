@@ -17,4 +17,8 @@ router.get('/feeds', (req, res) => {
     });
 });
 
+router.get('/new', (req, res) => {
+  res.render('newFeed');
+});
+
 module.exports = router;
