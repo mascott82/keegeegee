@@ -1,7 +1,7 @@
 const db = require('../connection');
 
 const getFeeds = () => {
-  return db.query('SELECT * FROM item_listing')
+  return db.query('SELECT * FROM item_listing ORDER BY created_at DESC')
     .then(data => {
       return data.rows;
     });
@@ -23,6 +23,7 @@ const getFeedsByPrice = (minPrice, maxPrice) => {
       params.push(maxPrice);
     }
   }
+  query += ' ORDER BY created_at DESC';
 
   return db.query(query, params)
     .then(data => {
@@ -37,7 +38,7 @@ const getFeedsByPrice = (minPrice, maxPrice) => {
 const addFeed = (feed) => {
   return db.query(`INSERT INTO item_listing (title, description, price, image_url, is_available, user_id)
       VALUES ($1, $2, $3, $4, $5, $6)`,
-  [feed.title, feed.description, feed.price, feed.image_url, feed.is_available, feed.user_id])
+  [feed.title, feed.desc, feed.price, feed.imageUrl, feed.isAvailable, feed.userId])
     .then(() => {
       console.log('Item added successfully!');
     })

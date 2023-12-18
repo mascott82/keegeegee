@@ -39,6 +39,7 @@ const usersRoutes = require('./routes/users');
 const feedsRoutes = require('./routes/feeds');
 const searchRoutes = require('./routes/search');
 const searchApiRoutes = require('./routes/search-api');
+const feedsApiRoutes = require('./routes/feeds-api');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -50,6 +51,8 @@ app.use('/users', usersRoutes);
 app.use('/f', feedsRoutes);
 app.use('/s', searchRoutes);
 app.use('/api/search', searchApiRoutes);
+app.use('/api/feeds', feedsApiRoutes);
+
 // Note: mount other resources here, using the same pattern above
 
 // Home page
