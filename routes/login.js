@@ -41,7 +41,7 @@ router.post("/login", (req, res) => {
 })
 
 router.post("/logout", (req, res) => {
-  req.session = null;
+  req.cookie = null;
   res.redirect("/login");
 });
 
