@@ -18,7 +18,6 @@ router.post('/:id', (req, res) => {
     itemId: feedId,
     userId: userId
   };
-
   favs.addFavourite(favourite)
     .then(() => {
       console.log('Marked the feed successfully! ');

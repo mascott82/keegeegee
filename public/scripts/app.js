@@ -6,17 +6,14 @@ $(function() {
     $('#feedsList .btn-group :button').on('click', function(event) {
 
       const feedId = $(event.currentTarget).val();
-      const btnName = $(event.currentTarget).text();
       const btnId = $(event.currentTarget).prop("id");
       const cardBoxId = $(event.currentTarget).parent().parent().parent().parent().prop("id");
 
       if (btnId.startsWith('fav_')) {
-        console.log("fav");
-
         $.post('/api/fav/:id', { feedId: feedId })
           .done(function(res) {
             if (res.message === 1) {
-              $('#sold_' + feedId).prop('disabled', true);
+              $('#fav_' + feedId).prop('disabled', true);
             }
           })
           .fail(function(jqXHR, textStatus, errorThrown) {
