@@ -1,6 +1,40 @@
 // Client facing scripts here
 
 $(function() {
+
+  const buttonEventHandler = () => {
+    $('#feedsList .btn-group :button').on('click', function(event) {
+
+      const feedId = $(event.currentTarget).val();
+      const btnName = $(event.currentTarget).text();
+      const btnId = $(event.currentTarget).prop("id");
+      const cardBoxId = $(event.currentTarget).parent().parent().parent().parent().prop("id");
+
+      if (btnId.startsWith('fav_')) {
+        console.log("fav");
+      }
+
+      if (btnId.startsWith('msg_')) {
+        console.log("msg");
+      }
+
+      if (btnId.startsWith('sold_')) {
+        console.log("sold");
+      }
+
+      if (btnId.startsWith('del_')) {
+        console.log("del");
+
+        $.post('/api/feeds/:id/delete', { feedId: feedId })
+          .done(function(data) {
+            console.log(data);
+          });
+      }
+
+    });
+
+  }
+
   $('#searchForm').on('submit', function(event) {
     event.preventDefault();
     $('#feedsList').empty();
@@ -15,10 +49,10 @@ $(function() {
                   <h5 class="card-title">${element.title}</h5>
                   <p class="card-text">${element.description}</p>
                   <div id="btn-group" class="btn-group" role="group" aria-label="Basic example">
-                    <a href="#" class="btn btn-success" id="isFavourite">Mark as my favourite</a>
-                    <a href="#" class="btn btn-primary" id="msgBtn">Leave a message</a>
-                    <a href="#" class="btn btn-warning" id="isSold">Mark as sold</a>
-                    <a href="#" class="btn btn-danger" id="delBtn">Delete</a>
+                  <button type="button" class="btn btn-success" value="${element.id}">Mark as my favourite</button>
+                  <button type="button" class="btn btn-primary" value="${element.id}">Leave a message</button>
+                  <button type="button" class="btn btn-warning" value="${element.id}">Mark as sold</button>
+                  <button type="button" class="btn btn-danger" value="${element.id}">Delete</button>
                   </div>
                 </div>
               </div>
@@ -26,10 +60,10 @@ $(function() {
           `;
 
           $('#feedsList').append(cardBody);
+          buttonEventHandler();
         });
       });
   });
 
-
-
+  buttonEventHandler();
 });
