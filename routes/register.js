@@ -35,21 +35,29 @@ router.post('/register', (req, res) => {
     password,
   };
 
-  if (!username || !email || !password) {
-    return res.status(400).send("Error: name, email, and password is required");
+  if(!username || !email || !password) {
+    return res.status(400).send("Error: username, email, and password is required to register");
   }
 
-  if (getUserIDByEmail(email, users)) {
-    return res.status(404).send("User already exists");
-  }
+  users.getUsers()
+  .then((data) => {
+    const userWithEmail = data.find((user) => user.email === email);
 
-  users[newUser.id] = newUser;
-  res.session("user_id", randomUserID);
-  res.session("user_email", email);
+    if (userWithEmail) {
+      return res.status(404).send("User already exists");
+    }
 
-  console.log(newUser)
+    // console.log("NEW USER: ", newUser)
+    addUser(newUser)
+    console.log("DATA: ", data)
 
-  res.redirect("/f/feeds");
+    res.redirect("/f/feeds");
+
+  })
+  .catch(error => {
+    console.error('Error searching user: ', error);
+  });
+
 });
 
 

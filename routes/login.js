@@ -15,7 +15,7 @@ router.post("/", (req, res) => {
     return res.status(400).send("Error: email and password is required");
   }
 
-  const userInfo = users.loginUser(email, password)
+users.loginUser(email, password)
   .then((data) => {
       if (data.length === 0) {
         return res.status(403).send("Email or password is incorrect. Please try again.");
