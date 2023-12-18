@@ -36,8 +36,8 @@ const getFeedsByPrice = (minPrice, maxPrice) => {
 };
 
 const addFeed = (feed) => {
-  return db.query(`INSERT INTO item_listing (title, description, price, image_url, is_available, user_id, created_at)
-      VALUES ($1, $2, $3, $4, $5, $6, CURRENT_TIMESTAMP)`,
+  return db.query(`INSERT INTO item_listing (title, description, price, image_url, is_available, user_id)
+      VALUES ($1, $2, $3, $4, $5, $6)`,
   [feed.title, feed.desc, feed.price, feed.imageUrl, feed.isAvailable, feed.userId])
     .then(() => {
       console.log('Item added successfully!');
