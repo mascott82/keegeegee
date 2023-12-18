@@ -1,11 +1,21 @@
 const express = require('express');
 const router = express.Router();
+const cookieParser = require('cookie-parser')
 const users = require('../db/queries/users');
-const { getUsers, addUser, loginUser, getUserIDByEmail  } = require('../db/queries/users')
+const { getUsers, addUser, loginUser } = require('../db/queries/users')
 
 const generateRandomString = function() {
   return Math.random().toString(36).substring(2, 8);
 }
+
+const getUserIDByEmail = (email, users) => {
+  for (let userID in users) {
+    if (users[userID].email === email) {
+      return userID;
+    }
+  }
+  return false;
+};
 
 router.get('/register', (req, res) => {
   res.render('register');
@@ -22,8 +32,8 @@ router.post('/register', (req, res) => {
     password,
   };
 
-  if (!email || !password) {
-    return res.status(400).send("Error: email and password is required");
+  if (!full_name || !email || !password) {
+    return res.status(400).send("Error: name, email, and password is required");
   }
 
   if (getUserIDByEmail(email, users)) {
@@ -31,8 +41,11 @@ router.post('/register', (req, res) => {
   }
 
   users[newUser.id] = newUser;
-  users.id = randomUserID;
-  users.email = email;
+  res.cookie("user_id", randomUserID);
+  res.cookie("user_email", email);
+
+  console.log(newUser)
+
   res.redirect("/f/feeds");
 });
 
