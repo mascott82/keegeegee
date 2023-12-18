@@ -7,14 +7,18 @@ const generateRandomString = function() {
   return Math.random().toString(36).substring(2, 8);
 }
 
-const getUserIDByEmail = (email, users) => {
-  for (let userID in users) {
-    if (users[userID].email === email) {
-      return userID;
-    }
-  }
-  return false;
-};
+/* const addUser = (user) => {
+  return db.query(`INSERT INTO users (username, email, password, full_name, created_at)
+      VALUES ($1, $2, $3, $4, CURRENT_TIMESTAMP)`,
+  [user.username, user.email, user.password, user.full_name])
+    .then(() => {
+      console.log('User added successfully!');
+    })
+    .catch(error => {
+      console.error('Error adding user: ', error);
+      throw error;
+    });
+}; */
 
 router.get('/register', (req, res) => {
   res.render('register');
@@ -23,15 +27,15 @@ router.get('/register', (req, res) => {
 router.post('/register', (req, res) => {
   console.log(req.body)
   const randomUserID = generateRandomString();
-  const { full_name, email, password } = req.body;
+  const { username, email, password } = req.body;
   const newUser = {
     id: randomUserID,
-    full_name,
+    username,
     email,
     password,
   };
 
-  if (!full_name || !email || !password) {
+  if (!username || !email || !password) {
     return res.status(400).send("Error: name, email, and password is required");
   }
 
