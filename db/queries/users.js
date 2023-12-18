@@ -23,8 +23,9 @@ const addUser = (user) => {
 const loginUser = (email, password) => {
   return db.query(`SELECT * FROM users WHERE email = $1 and password = $2`,
     [email, password])
-    .then(() => {
+    .then((data) => {
       console.log('User logon successfully!');
+      return data.rows;
     })
     .catch(error => {
       console.error('Error searching user: ', error);
