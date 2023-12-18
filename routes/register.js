@@ -3,11 +3,11 @@ const router = express.Router();
 const users = require('../db/queries/users');
 const { getUsers, addUser, loginUser } = require('../db/queries/users')
 
-router.get('/register', (req, res) => {
+router.get('/', (req, res) => {
   res.render('register');
 });
 
-router.post('/register', (req, res) => {
+router.post('/', (req, res) => {
   console.log(req.body)
   const { username, email, password } = req.body;
   const newUser = {
@@ -28,9 +28,7 @@ router.post('/register', (req, res) => {
       return res.status(404).send("User already exists");
     }
 
-    // console.log("NEW USER: ", newUser)
     addUser(newUser)
-    console.log("DATA: ", data)
 
     res.redirect("/f/feeds");
 
