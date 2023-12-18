@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const cookieParser = require('cookie-parser')
 const users = require('../db/queries/users');
 const { getUsers, addUser, loginUser } = require('../db/queries/users')
 

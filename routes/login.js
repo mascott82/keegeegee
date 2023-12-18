@@ -1,24 +1,17 @@
 const express = require('express');
-const router  = express.Router();
-const cookieParser = require('cookie-parser')
+const router = express.Router();
+/* const cookieParser = require('cookie-parser') */
 const users = require('../db/queries/users');
 
-const getUserIDByEmail = (email, users) => {
-  for (let userID in users) {
-    if (users[userID].email === email) {
-      return userID;
-    }
-  }
-  return false;
-};
-
 router.get('/', (req, res) => {
-  res.render('/');
+  res.render('login');
 });
 
 router.post("/", (req, res) => {
   const { email, password } = req.body;
-  const userInfo = getUserIDByEmail(email, users);
+  console.log({ email, password })
+
+  const userInfo = users.loginUser(email, password);
 
   if (!email || !password) {
     return res.status(400).send("Error: email and password is required");
@@ -29,21 +22,22 @@ router.post("/", (req, res) => {
       return res.status(403).send("No account associated with that email was found.");
     }
 
+
     if (userInfo) {
       if (!req.body.password !== userInfo.password) {
         return res.status(403).send("Password is incorrect.");
       }
     }
 
-  res.cookie("email", email)
-  res.redirect("/f/feeds")
+    res.redirect("/f/feeds")
   }
 })
 
-router.post("/logout", (req, res) => {
+
+/* router.post("/logout", (req, res) => {
   req.cookie = null;
   res.redirect("/");
-});
+}); */
 
 module.exports = router;
 
