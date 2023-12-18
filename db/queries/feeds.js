@@ -61,7 +61,7 @@ const deleteFeed = (id) => {
 };
 
 const updateFeedAvailability = (id, isAvailable) => {
-  return db.query(`UPDATE item_list SET is_available = $1`,
+  return db.query(`UPDATE item_listing SET is_available = $1`,
     [isAvailable])
     .then(data => {
       console.log('Item was marked successfully!');
