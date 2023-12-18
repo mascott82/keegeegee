@@ -12,11 +12,11 @@ const getUserIDByEmail = (email, users) => {
   return false;
 };
 
-router.get('/login', (req, res) => {
-  res.render('login');
+router.get('/', (req, res) => {
+  res.render('/');
 });
 
-router.post("/login", (req, res) => {
+router.post("/", (req, res) => {
   const { email, password } = req.body;
   const userInfo = getUserIDByEmail(email, users);
 
@@ -42,7 +42,7 @@ router.post("/login", (req, res) => {
 
 router.post("/logout", (req, res) => {
   req.cookie = null;
-  res.redirect("/login");
+  res.redirect("/");
 });
 
 module.exports = router;
