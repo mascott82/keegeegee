@@ -60,8 +60,8 @@ app.use('/f', feedsRoutes);
 app.use('/fav', favoritesRoutes);
 app.use('/s', searchRoutes);
 app.use('/api/search', searchApiRoutes);
-app.use('/login', loginRoutes)
-app.use(registerRoutes);
+app.use('/login', loginRoutes);
+app.use('/register', registerRoutes);
 app.use('/api/feeds', feedsApiRoutes);
 
 // Note: mount other resources here, using the same pattern above

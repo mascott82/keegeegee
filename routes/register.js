@@ -3,49 +3,40 @@ const router = express.Router();
 const users = require('../db/queries/users');
 const { getUsers, addUser, loginUser } = require('../db/queries/users')
 
-const generateRandomString = function() {
-  return Math.random().toString(36).substring(2, 8);
-}
-
-const getUserIDByEmail = (email, users) => {
-  for (let userID in users) {
-    if (users[userID].email === email) {
-      return userID;
-    }
-  }
-  return false;
-};
-
-router.get('/register', (req, res) => {
+router.get('/', (req, res) => {
   res.render('register');
 });
 
-router.post('/register', (req, res) => {
+router.post('/', (req, res) => {
   console.log(req.body)
-  const randomUserID = generateRandomString();
-  const { full_name, email, password } = req.body;
+  const { username, email, password } = req.body;
   const newUser = {
-    id: randomUserID,
-    full_name,
+    username,
     email,
     password,
   };
 
-  if (!full_name || !email || !password) {
-    return res.status(400).send("Error: name, email, and password is required");
+  if(!username || !email || !password) {
+    return res.status(400).send("Error: username, email, and password is required to register");
   }
 
-  if (getUserIDByEmail(email, users)) {
-    return res.status(404).send("User already exists");
-  }
+  users.getUsers()
+  .then((data) => {
+    const userWithEmail = data.find((user) => user.email === email);
 
-  users[newUser.id] = newUser;
-  res.session("user_id", randomUserID);
-  res.session("user_email", email);
+    if (userWithEmail) {
+      return res.status(404).send("User already exists");
+    }
 
-  console.log(newUser)
+    addUser(newUser)
 
-  res.redirect("/f/feeds");
+    res.redirect("/f/feeds");
+
+  })
+  .catch(error => {
+    console.error('Error searching user: ', error);
+  });
+
 });
 
 
