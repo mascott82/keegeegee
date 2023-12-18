@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Users</title>
+
+  <meta charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" />
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/layout.css" />
+  <link rel="stylesheet" href="/styles/login.css" />
+
+  <script src="/vendor/jquery-3.0.0.js"></script>
+  <script defer src="/scripts/users.js"></script>
+</head>
+
+<body>
+
+  <div class="login-container">
+      <div class="login-left-page">
+        <h1>Welcome to KeeGeeGee!</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+        <img>
+    </div>
+
+    <div>
+      <form method="POST" action="/login" class="login-right-page">
+        <h2>Welcome back!</h2>
+        <label class="login-title">Email:</label>
+        <input class="login-input" type="email" name="email" placeholder="Type your email">
+
+        <label class="login-title">Enter Password:</label>
+        <input class="login-input" type="password" name="password" placeholder="Type your password">
+
+        <button class="submit-btn">Submit</button>
+        <p>Don't have an account? <a href="/register" class="register-link">Sign Up!</a></p>
+      </form>
+    </div>
+  </div>
+
+  </body>
+
+</html>
