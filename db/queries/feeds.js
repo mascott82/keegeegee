@@ -1,9 +1,36 @@
 const db = require('../connection');
 
 const getFeeds = () => {
-  return db.query('SELECT * FROM item_listing;')
+  return db.query('SELECT * FROM item_listing')
     .then(data => {
       return data.rows;
+    });
+};
+
+const getFeedsByPrice = (minPrice, maxPrice) => {
+  let query = 'SELECT * FROM item_listing';
+  let params = [];
+  if (minPrice !== null && minPrice !== 'undefined') {
+    query += ' WHERE price >= $1';
+    params.push(minPrice);
+    if (maxPrice !== null && maxPrice !== 'undefined') {
+      query += ' AND price <= $2';
+      params.push(maxPrice);
+    }
+  } else {
+    if (maxPrice !== null && maxPrice !== 'undefined') {
+      query += ' WHERE price <= $1';
+      params.push(maxPrice);
+    }
+  }
+
+  return db.query(query, params)
+    .then(data => {
+      return data.rows;
+    })
+    .catch(error => {
+      console.error('Error fetching item: ', error);
+      throw error;
     });
 };
 
@@ -45,4 +72,4 @@ const updateFeedAvailability = (id, isAvailable) => {
     });
 };
 
-module.exports = { getFeeds, addFeed, deleteFeed, updateFeedAvailability };
+module.exports = { getFeeds, getFeedsByPrice, addFeed, deleteFeed, updateFeedAvailability };

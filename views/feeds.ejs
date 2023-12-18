@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Users</title>
+  <title>Feeds</title>
 
   <meta charset="UTF-8" >
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
@@ -19,16 +19,28 @@
 
 <body>
   <h1>Feeds</h1>
-  <% for (let i = 0; i < feeds.length; i++) { %>
-    <div class="card" style="width: 18rem;">
-      <img src="<%= feeds[i].image_url %>" class="card-img-top" alt="..." width="100" height="100">
-      <div class="card-body">
-        <h5 class="card-title"><%= feeds[i].title %></h5>
-        <p class="card-text"><%= feeds[i].description %></p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
+  <div class="container-fluid">
+    <div class="input-group mb-3" id="searchBox">
+      <span class="input-group-text" id="inputGroup-sizing-default">Looking for price: </span>
+      <span class="input-group-text" id="inputGroup-sizing-default">from: $</span>
+      <input id="minPrice" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      <span class="input-group-text" id="inputGroup-sizing-default">to: $</span>
+      <input id="maxPrice" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
     </div>
-  <% } %>
+    <% for (let i = 0; i < feeds.length; i++) { %>
+      <div class="card mb-3">
+        <div class="card-body">
+          <img src="<%= feeds[i].image_url %>" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title"><%= feeds[i].title %></h5>
+            <p class="card-text"><%= feeds[i].description %></p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+    <% } %>
+  </div>
 </body>
 
 </html>
