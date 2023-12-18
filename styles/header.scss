@@ -1,4 +1,42 @@
 .nav-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   width: 100vw;
   background-color: aqua;
+  padding: 0 3rem;
+  margin: 0 auto;
+}
+
+.nav-bar-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.nav-search {
+  padding: 0;
+}
+
+.search-text {
+  margin-left: 1rem;
+}
+
+.nav-bar-right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.nav-link-left {
+  padding: 1rem 0 1rem 1rem;
+}
+
+.nav-link-right{
+  padding: 0.1rem;
+}
+
+a {
+  text-decoration: none;
 }
