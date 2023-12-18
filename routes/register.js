@@ -9,7 +9,6 @@ router.get('/register', (req, res) => {
 
 router.post('/register', (req, res) => {
   console.log(req.body)
-  const randomUserID = generateRandomString();
   const { username, email, password } = req.body;
   const newUser = {
     username,
