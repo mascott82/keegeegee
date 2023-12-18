@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Feeds</title>
+  <title>Keegeegee - Buy/Sell</title>
 
   <meta charset="UTF-8" >
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
@@ -15,31 +15,41 @@
 
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/users.js"></script>
+  <script defer src="/scripts/app.js"></script>
 </head>
 
 <body>
   <h1>Feeds</h1>
   <div class="container-fluid">
-    <div class="input-group mb-3" id="searchBox">
-      <span class="input-group-text" id="inputGroup-sizing-default">Looking for price: </span>
-      <span class="input-group-text" id="inputGroup-sizing-default">from: $</span>
-      <input id="minPrice" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-      <span class="input-group-text" id="inputGroup-sizing-default">to: $</span>
-      <input id="maxPrice" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-      <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
-    </div>
-    <% for (let i = 0; i < feeds.length; i++) { %>
-      <div class="card mb-3">
-        <div class="card-body">
-          <img src="<%= feeds[i].image_url %>" class="card-img-top" alt="...">
+    <form id="searchForm" action="/s/search" method="post">
+      <div class="input-group mb-3" id="searchBox">
+        <span class="input-group-text" id="inputGroup-sizing-default">Looking for price: </span>
+        <span class="input-group-text" id="inputGroup-sizing-default">from: $</span>
+        <input id="minPrice" name="minPrice" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        <span class="input-group-text" id="inputGroup-sizing-default">to: $</span>
+        <input id="maxPrice" name="maxPrice" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        <button class="btn btn-outline-secondary" type="submit" id="searchBtn">Search</button>
+      </div>
+    </form>
+    <div id="feedsList">
+      <% for (let i = 0; i < feeds.length; i++) { %>
+        <div class="card mb-3">
           <div class="card-body">
-            <h5 class="card-title"><%= feeds[i].title %></h5>
-            <p class="card-text"><%= feeds[i].description %></p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <img src="<%= feeds[i].image_url %>" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title"><%= feeds[i].title %></h5>
+              <p class="card-text"><%= feeds[i].description %></p>
+              <div id="btn-group" class="btn-group" role="group" aria-label="Basic example">
+                <a href="#" class="btn btn-success" id="isFavourite">Mark as my favourite</a>
+                <a href="#" class="btn btn-primary" id="msgBtn">Leave a message</a>
+                <a href="#" class="btn btn-warning" id="isSold">Mark as sold</a>
+                <a href="#" class="btn btn-danger" id="delBtn">Delete</a>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    <% } %>
+      <% } %>
+    </div>
   </div>
 </body>
 

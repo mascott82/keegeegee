@@ -20,4 +20,14 @@ router.get('/:minprice/:maxprice', (req, res) => {
     });
 });
 
+router.post('/search', (req, res) => {
+  const minPrice = req.body.minPrice;
+  const maxPrice = req.body.maxPrice;
+
+  feed.getFeedsByPrice(minPrice, maxPrice)
+    .then(feeds => {
+      res.render('feeds', { feeds });
+    });
+});
+
 module.exports = router;
