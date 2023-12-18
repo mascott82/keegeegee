@@ -20,8 +20,8 @@ const getMessagesByUser = (id) => {
 };
 
 const addMessage = (message) => {
-  return db.query(`INSERT INTO messages (from_user_id, to_user_id, content, pid)
-      VALUES ($1, $2, $3, $4)`,
+  return db.query(`INSERT INTO messages (from_user_id, to_user_id, content, pid, created_at)
+      VALUES ($1, $2, $3, $4, CURRENT_TIMESTAMP)`,
   [message.fromUserId, message.toUserId, message.content, message.pid])
     .then(() => {
       console.log('Message added successfully!');
