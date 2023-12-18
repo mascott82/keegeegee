@@ -10,13 +10,13 @@ const router  = express.Router();
 
 const feed = require('../db/queries/feeds');
 
-router.get('/:minprice/:maxprice', (req, res) => {
-  const minPrice = req.params.minprice;
-  const maxPrice = req.params.maxprice;
+router.post('/', (req, res) => {
+  const minPrice = req.body.minPrice;
+  const maxPrice = req.body.maxPrice;
 
   feed.getFeedsByPrice(minPrice, maxPrice)
     .then(feeds => {
-      res.render('feeds', { feeds });
+      res.send(feeds);
     });
 });
 

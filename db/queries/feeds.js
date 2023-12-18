@@ -10,15 +10,15 @@ const getFeeds = () => {
 const getFeedsByPrice = (minPrice, maxPrice) => {
   let query = 'SELECT * FROM item_listing';
   let params = [];
-  if (minPrice !== null && minPrice !== 'undefined') {
+  if (minPrice !== null && minPrice !== 'undefined' && minPrice !== '') {
     query += ' WHERE price >= $1';
     params.push(minPrice);
-    if (maxPrice !== null && maxPrice !== 'undefined') {
+    if (maxPrice !== null && maxPrice !== 'undefined' && maxPrice !== '') {
       query += ' AND price <= $2';
       params.push(maxPrice);
     }
   } else {
-    if (maxPrice !== null && maxPrice !== 'undefined') {
+    if (maxPrice !== null && maxPrice !== 'undefined' && maxPrice !== '') {
       query += ' WHERE price <= $1';
       params.push(maxPrice);
     }
