@@ -3,9 +3,9 @@
 DROP TABLE IF EXISTS messages CASCADE;
 CREATE TABLE messages (
   id SERIAL PRIMARY KEY NOT NULL,
-  from_user_id INTEGER REFERENCES users(id),
-  to_user_id INTEGER REFERENCES users(id),
+  from_user_id INTEGER REFERENCES users(id) ON DELETE CASCASE,
+  to_user_id INTEGER REFERENCES users(id) ON DELETE CASCASE,
   content text,
   pid INTEGER,
-  created_at  TIMESTAMP
+  created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
