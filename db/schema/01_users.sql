@@ -6,6 +6,6 @@ CREATE TABLE users (
   username VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL,
-  full_name VARCHAR(255),
+  phone_number VARCHAR(255),
   created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
