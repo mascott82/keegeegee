@@ -5,7 +5,7 @@ require('dotenv').config();
 const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
-const session = require('express-session')
+const session = require('express-session');
 const bodyParser = require('body-parser');
 
 const PORT = process.env.PORT || 8080;
@@ -50,6 +50,7 @@ const loginRoutes = require('./routes/login');
 const registerRoutes = require('./routes/register');
 const feedsApiRoutes = require('./routes/feeds-api');
 const favoritesApiRoutes = require('./routes/favorites-api');
+const messageApiRoutes = require('./routes/message-api');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -65,6 +66,7 @@ app.use('/login', loginRoutes);
 app.use('/register', registerRoutes);
 app.use('/api/feeds', feedsApiRoutes);
 app.use('/api/fav', favoritesApiRoutes);
+app.use('/api/msg', messageApiRoutes);
 
 // Note: mount other resources here, using the same pattern above
 

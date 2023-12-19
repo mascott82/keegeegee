@@ -16,6 +16,8 @@
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/users.js"></script>
   <script defer src="/scripts/app.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js" integrity="sha512-X/YkDZyjTf4wyc2Vy16YGCPHwAY8rZJY+POgokZjQB2mhIRFJCckEGc6YyX9eNsPfn0PzThEuNs+uaomE5CO6A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <body>
@@ -39,9 +41,12 @@
             <div class="card-body">
               <h5 class="card-title"><%= feeds[i].title %></h5>
               <p class="card-text"><%= feeds[i].description %></p>
+              <p class="card-text"><%= feeds[i].username %></p>
+              <p class="card-text"><%= feeds[i].email %></p>
+              <p class="card-text"><%= feeds[i].created_at %></p>
               <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-success" value="<%= feeds[i].id %>" id="fav_<%= feeds[i].id %>">Mark as my favourite</button>
-                <button type="button" class="btn btn-primary" value="<%= feeds[i].id %>" id="msg_<%= feeds[i].id %>">Leave a message</button>
+                <button type="button" class="btn btn-primary" value="<%= feeds[i].id %>" id="msg_<%= feeds[i].id %>" name="<%= feeds[i].username %>,<%= feeds[i].user_id %>,<%= feeds[i].id%>,<%= feeds[i].pid%>">Leave a message</button>
                 <button type="button" class="btn btn-warning" value="<%= feeds[i].id %>" id="sold_<%= feeds[i].id %>">Mark as sold</button>
                 <button type="button" class="btn btn-danger" value="<%= feeds[i].id %>" id="del_<%= feeds[i].id %>">Delete</button>
               </div>
@@ -49,6 +54,32 @@
           </div>
         </div>
       <% } %>
+    </div>
+    <div class="modal fade" id="msgModal" tabindex="-1" aria-labelledby="msgModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="msgModalLabel">New message</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form id="msgModalForm">
+            <div class="modal-body">
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Recipient:</label>
+                <input type="text" class="form-control" id="recipient-name">
+              </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">Message:</label>
+                <textarea class="form-control" id="message-text"></textarea>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="msgModalSubmit">Send message</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </body>
