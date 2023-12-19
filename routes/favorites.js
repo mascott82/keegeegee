@@ -7,39 +7,46 @@
 
 const express = require('express');
 const router  = express.Router();
+const favQry = require('../db/queries/favourites');
 
 
-router.get('/favorites', (req, res) => {
-  let sortby = req.query.sortby;
+const _customSortQryResult = function(_qryResult, _sortPolicy) {
+  // _sortPolicy comes from API req.
   let sortedFavorites;
-
-  let favorites = [
-    { username:'Abby', title: 'Laptop', price: 100, description: "Brand new laptop with high-performance specifications", date: new Date(2023, 11, 15), status: 'Available' },
-    { username:'Chai', title: 'Smartphone', price: 200, description: "Latest model smartphone with advanced features", date: new Date(2023, 11, 17), status: 'Sold out' },
-    { username:'Nemo', title: 'Coffee Maker', price: 300, description: "Premium coffee maker for brewing delicious coffee", date: new Date(2023, 11, 12), status: 'Sold out' },
-  ];
-
-  switch (sortby) {
+  switch (_sortPolicy) {
   case 'price_asc':
-    sortedFavorites = favorites.sort((a, b) => a.price - b.price);
+    sortedFavorites = _qryResult.sort((a, b) => a.price - b.price);
     break;
   case 'price_desc':
-    sortedFavorites = favorites.sort((a, b) => b.price - a.price);
+    sortedFavorites = _qryResult.sort((a, b) => b.price - a.price);
     break;
   case 'date_asc':
-    sortedFavorites = favorites.sort((a, b) => a.date - b.date);
+    sortedFavorites = _qryResult.sort((a, b) => a.date - b.date);
     break;
   case 'date_desc':
-    sortedFavorites = favorites.sort((a, b) => b.date - a.date);
+    sortedFavorites = _qryResult.sort((a, b) => b.date - a.date);
     break;
   case 'availability':
-    sortedFavorites = favorites.filter(item => item.status === 'Available');
+    sortedFavorites = _qryResult.filter(item => item.status === 'Available');
     break;
   default:
-    sortedFavorites = favorites;
+    sortedFavorites = _qryResult;
   }
+  return sortedFavorites;
+};
 
-  res.render('favorites', { favorites: sortedFavorites });
+router.get('/favorites', (req, res) => {
+  req.session.loginstatus = {userid:2};  // TODO: replace this hard-coded loginstatus with actual session cookies
+  if (req.session.loginstatus) {
+    // request user's favorites information against database via query
+    favQry.getFavourites(req.session.loginstatus.userid).then(favs => {
+      const _sortedResult = _customSortQryResult(favs, req.query.sortby);
+      res.render('favorites', { favorites: _sortedResult });
+    });
+  } else {
+    // redirect to login page
+    res.status(400).send({message:"login required"}); // TODO: replace this raw error msg with actual login page redirection
+  }
 });
 
 module.exports = router;

@@ -34,11 +34,10 @@
         </select>
       </form>
     </div>
-
     <% favorites.forEach(function(item) { %>
       <div class="card">
         <div class="card-image-container">
-          <img src="<%= item.imageUrl %>" alt="Item image" class="card-image">
+          <img src="<%= item.image_url %>" alt="Item image" class="card-image">
         </div>
         <div class="card-info-container">
           <div class="card-info title-status">
@@ -53,7 +52,7 @@
             <p><%= item.description %></p>
           </div>
           <div class="card-info date-icons">
-            <span><%= item.date.getFullYear() %>-<%= (item.date.getMonth() + 1) %>-<%= item.date.getDate() %> by <%= item.username %></span>
+            <span><%= item.created_at.getFullYear() %>-<%= (item.created_at.getMonth() + 1) %>-<%= item.created_at.getDate() %> by <%= item.username %></span>
             <div class="icons">
               <!-- Add icon elements here -->
             </div>
