@@ -28,6 +28,7 @@ $(function() {
         const pid = msgHeader[3] ? msgHeader[3] : 0;
 
         $("#recipient-name").val('@' + userName);
+        $('#msgModalLabel').text('New In-App Message');
         $("#msgModal").modal('show');
 
         $('#msgModalSubmit').on('click', function(event) {
@@ -58,7 +59,34 @@ $(function() {
       }
 
       if (btnId.startsWith('sms_')) {
+        const msgHeader = btnName.split(",");
+        const userName = msgHeader[0];
+        const toUserId = msgHeader[1];
+        const feedId = msgHeader[2];
+        const pid = msgHeader[3] ? msgHeader[3] : 0;
+        const phoneNumber = msgHeader[4];
 
+        $("#recipient-name").val('@' + userName);
+        $('#msgModalLabel').text('New Text Message');
+        $("#msgModal").modal('show');
+
+        $('#msgModalSubmit').on('click', function(event) {
+          $.post('/api/msg/sms', {
+            toUserPhoneNumber:  phoneNumber,
+            content: $("#message-text").val()
+          })
+            .done(function(res) {
+              console.log(res.message);
+            });
+
+          $("#msgModal").modal('hide');
+        });
+
+        // Event handler for hiding the modal and clearing content
+        $('#msgModal').on('hide.bs.modal', () => {
+          $("#recipient-name").val('');
+          $("#message-text").val('');
+        });
       }
 
       if (btnId.startsWith('sold_')) {
@@ -107,9 +135,9 @@ $(function() {
                   <p class="card-text">${element.created_at}</p>
                   <div id="btn-group" class="btn-group" role="group" aria-label="Basic example">
                   <button type="button" class="btn btn-success" value="${element.id}">Mark as my favourite</button>
-                  <button type="button" class="btn btn-primary" value="${element.id}" name="${element.username}">Leave a message</button>
-                  <button type="button" class="btn btn-primary" value="${element.id}" id="email_${element.id}">Email me</button>
-                  <button type="button" class="btn btn-primary" value="${element.id}" id="sms_${element.id}">Text me</button>
+                  <button type="button" class="btn btn-primary" value="${element.id}" name="${element.username},${element.user_id},${element.id},${element.pid}" >Leave a message</button>
+                  <button type="button" class="btn btn-primary" value="${element.id}" id="email_${element.id}" value="${element.email}">Email me</button>
+                  <button type="button" class="btn btn-primary" value="${element.id}" id="sms_${element.id}" name="${element.username},${element.user_id},${element.id},${element.pid},${element.phone_number}">Text me</button>
                   <button type="button" class="btn btn-warning" value="${element.id}">Mark as sold</button>
                   <button type="button" class="btn btn-danger" value="${element.id}">Delete</button>
                   </div>

@@ -58,4 +58,23 @@ router.post('/reply', (req, res) => {
     });
 });
 
+router.post('/sms', (req, res) => {
+  const accountSid = 'YOUR_TWILIO_ACCOUNT_SID';
+  const authToken = 'YOUR_TWILIO_AUTH_TOKEN';
+  const twilioPhoneNumber = 'YOUR_TWILIO_PHONE_NUMBER';
+
+  const client = require('twilio')(accountSid, authToken);
+
+  const recipientPhoneNumber = req.body.userPhoneNumber;
+  const msgContent = req.body.content;
+
+  client.messages.create({
+    body: msgContent,
+    from: twilioPhoneNumber,
+    to: recipientPhoneNumber
+  })
+    .then(message => res.send({ message: `Message SID: ${message.sid}` }))
+    .catch(error => console.error(error));
+});
+
 module.exports = router;
