@@ -4,7 +4,11 @@ const session = require('express-session');
 const users = require('../db/queries/users');
 
 router.get('/', (req, res) => {
-  res.render('login', users);
+  users.getUsers()
+    .then(data => {
+      console.log({data})
+      res.render('login', { data });
+    })
 });
 
 router.post("/", (req, res) => {
