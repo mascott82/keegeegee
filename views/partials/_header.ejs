@@ -27,27 +27,39 @@
     <div class="nav-bar-left">
       <span class="nav-link-left"><a href="/f/feeds">Home</a></span>
       <div class="nav-search">
-        <span class="nav-link-left search-text">Search</span>
+        <button class="nav-link-left search-text search-btn">Search</button>
         <i class="fa-solid fa-chevron-down"></i>
       </div>
     </div>
 
-    <div class="nav-bar-right">
-      <div class="nav-login">
-          <i class="fa-regular fa-user nav-link-right"></i>
-          <span class="nav-link-right">Username</span>
+    <% if (userId) { %>
+      <div class="nav-bar-right">
+        <div class="nav-dropdown">
+          <button class="user-btn">
+            <i class="fa-regular fa-user nav-link-right"></i>
+            <%= username %>
+          </button>
+          <div class="dropdown-links">
+            <a href="/fav/favorites">Favourites</a>
+            <a href="/f/new">New Listing</a>
+            <a href="/m/list">Messages</a>
+            <form method="POST" action="/logout">
+              <button class="logout-btn">Logout</button>
+            </form>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <!-- <div class="nav-bar-right">
-      <div class="nav-login">
-        <a href="/login">
-          <i class="fa-solid fa-lock nav-link-right"></i>
-          <span class="nav-link-right">Login</span>
-        </a>
-      </div>
-    </div> -->
-
+      <%} else { %>
+        <div class="nav-bar-right">
+          <div class="nav-login">
+            <a href="/login">
+              <i class="fa-solid fa-lock nav-link-right"></i>
+              <span class="nav-link-right">Login</span>
+            </a>
+          </div>
+        </div>
+        <% } %>
   </div>
 
 </body>

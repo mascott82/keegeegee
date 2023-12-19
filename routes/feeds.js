@@ -13,7 +13,8 @@ const feed = require('../db/queries/feeds');
 router.get('/feeds', (req, res) => {
   feed.getFeeds()
     .then(feeds => {
-      res.render('feeds', { feeds });
+      const templateVars = { username: req.session.username, userId: req.session.userId, feeds }
+      res.render('feeds', templateVars);
     });
 });
 

@@ -24,6 +24,16 @@
   width: 50vw;
 }
 
+.phone-input {
+  display: flex;
+  flex-direction: column;
+}
+
+#phone-number-input {
+font-size: small;
+text-align: right;
+}
+
 .register-header {
   display: flex;
   flex-direction: column;
@@ -43,8 +53,8 @@
 
 .register-title {
   width: 30vw;
-  margin-top: 1rem;
-  margin-bottom: 0.25rem;
+  margin: 0.5rem 0;
+  font-weight: bold;
 }
 
 .register-input {
