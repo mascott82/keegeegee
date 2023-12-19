@@ -1,7 +1,15 @@
 const db = require('../connection');
 
 const getFeeds = () => {
-  return db.query('SELECT * FROM item_listing ORDER BY created_at DESC')
+  const querySql = `
+    SELECT il.*, u.username AS username, u.email AS email
+    FROM item_listing AS il
+    INNER JOIN users AS u ON u.id = il.user_id
+    ORDER BY created_at DESC
+  `;
+
+  // return db.query('SELECT * FROM item_listing ORDER BY created_at DESC')
+  return db.query(querySql)
     .then(data => {
       return data.rows;
     });

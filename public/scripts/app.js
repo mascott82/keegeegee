@@ -1,12 +1,12 @@
 // Client facing scripts here
 
 $(function() {
-
   const buttonEventHandler = () => {
     $('#feedsList .btn-group :button').on('click', function(event) {
 
       const feedId = $(event.currentTarget).val();
       const btnId = $(event.currentTarget).prop("id");
+      const btnName = $(event.currentTarget).prop("name");
       const cardBoxId = $(event.currentTarget).parent().parent().parent().parent().prop("id");
 
       if (btnId.startsWith('fav_')) {
@@ -22,7 +22,27 @@ $(function() {
       }
 
       if (btnId.startsWith('msg_')) {
-        console.log("msg");
+        const msgHeader = btnName.split(",");
+        const userName = msgHeader[0];
+        const toUserId = msgHeader[1];
+        const feedId = msgHeader[2];
+
+        const fromUserId = 1;
+
+        $("#recipient-name").val('@' + userName);
+        $("#msgModal").modal('show');
+
+        $('#msgModalSubmit').on('click', function(event) {
+          console.log("===", userName, fromUserId, toUserId, feedId);
+
+          $("#msgModal").modal('hide');
+        });
+
+        // Event handler for hiding the modal and clearing content
+        $('#msgModal').on('hide.bs.modal', () => {
+          $("#recipient-name").val('');
+          $("#message-text").val('');
+        });
       }
 
       if (btnId.startsWith('sold_')) {
@@ -66,9 +86,12 @@ $(function() {
                 <div class="card-body">
                   <h5 class="card-title">${element.title}</h5>
                   <p class="card-text">${element.description}</p>
+                  <p class="card-text">${element.username}</p>
+                  <p class="card-text">${element.email}</p>
+                  <p class="card-text">${element.created_at}</p>
                   <div id="btn-group" class="btn-group" role="group" aria-label="Basic example">
                   <button type="button" class="btn btn-success" value="${element.id}">Mark as my favourite</button>
-                  <button type="button" class="btn btn-primary" value="${element.id}">Leave a message</button>
+                  <button type="button" class="btn btn-primary" value="${element.id}" name="${element.username}">Leave a message</button>
                   <button type="button" class="btn btn-warning" value="${element.id}">Mark as sold</button>
                   <button type="button" class="btn btn-danger" value="${element.id}">Delete</button>
                   </div>
