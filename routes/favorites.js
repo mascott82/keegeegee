@@ -14,9 +14,9 @@ router.get('/favorites', (req, res) => {
   let sortedFavorites;
 
   let favorites = [
-    { title: 'Laptop', price: 100, description: "Brand new laptop with high-performance specifications", date: new Date(2023, 11, 15), status: 'Available' },
-    { title: 'Smartphone', price: 200, description: "Latest model smartphone with advanced features", date: new Date(2023, 11, 17), status: 'Sold out' },
-    { title: 'Coffee Maker', price: 300, description: "Premium coffee maker for brewing delicious coffee", date: new Date(2023, 11, 12), status: 'Sold out' },
+    { username:'Abby', title: 'Laptop', price: 100, description: "Brand new laptop with high-performance specifications", date: new Date(2023, 11, 15), status: 'Available' },
+    { username:'Chai', title: 'Smartphone', price: 200, description: "Latest model smartphone with advanced features", date: new Date(2023, 11, 17), status: 'Sold out' },
+    { username:'Nemo', title: 'Coffee Maker', price: 300, description: "Premium coffee maker for brewing delicious coffee", date: new Date(2023, 11, 12), status: 'Sold out' },
   ];
 
   switch (sortby) {
