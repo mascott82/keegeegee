@@ -35,7 +35,6 @@ router.delete("/:id", (req, res) => {
   console.log(favId);
   try {
     favs.deleteFavourite(favId);
-    console.log(123);
   } catch (error) {
     console.error("Error deleting the item: ", error);
     res.status(500).json({ success: false });

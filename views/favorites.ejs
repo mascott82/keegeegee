@@ -67,8 +67,8 @@
             <div class="icons">
               <!-- Add icon elements here -->
             </div>
-            <button class="delete-button" data-id="<%= item.item_listing_id %>">
-              Delete <%= item.item_listing_id %>
+            <button class="delete-button" data-id="<%= item.id %>">
+              Delete
             </button>
           </div>
         </div>
@@ -90,16 +90,15 @@
       // console.log(delBtns);
       delBtns.forEach((item) => {
         item.addEventListener("click", function () {
-          //  console.log(item);
-          //  console.log(item.getAttribute("data-id"));
-          const listing_id = item.getAttribute("data-id");
-          //  doDelete(listing_id)
+          const favId = item.getAttribute("data-id");
+          console.log("favId");
+          console.log(favId);
           $.ajax({
-            url: `/api/fav/${listing_id}`,
+            url: `/api/fav/${favId}`,
             method: "DELETE",
             success: function (response) {
               if (response.success) {
-                $(`button[data-id='${listing_id}']`).closest(".card").remove();
+                $(`button[data-id='${favId}']`).closest(".card").remove();
               }
             },
             error: function (error) {

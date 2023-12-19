@@ -5,6 +5,7 @@ const getFavourites = (_userid) => {
   let _qryString =
   `With fav as (SELECT * from favourites WHERE user_id = ${_userid})
   SELECT
+  a.id,
   a.user_id,
   a.item_listing_id,
   a.created_at,
