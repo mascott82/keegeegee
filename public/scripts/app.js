@@ -3,7 +3,6 @@
 $(function() {
   const buttonEventHandler = () => {
     $('#feedsList .btn-group :button').on('click', function(event) {
-
       const feedId = $(event.currentTarget).val();
       const btnId = $(event.currentTarget).prop("id");
       const btnName = $(event.currentTarget).prop("name");
@@ -33,7 +32,6 @@ $(function() {
 
         $('#msgModalSubmit').on('click', function(event) {
           $.post('/api/msg/new', {
-            fromUserId: fromUserId,
             toUserId: toUserId,
             itemId: feedId,
             content: $("#message-text").val(),
@@ -51,6 +49,16 @@ $(function() {
           $("#recipient-name").val('');
           $("#message-text").val('');
         });
+      }
+
+      if (btnId.startsWith('email_')) {
+        const emailAddr = $(event.currentTarget).val();
+        console.log(emailAddr);
+        window.location.href = `mailto:${emailAddr}?subject=Subject%20of%20the%20email&body=Body%20of%20the%20email`;
+      }
+
+      if (btnId.startsWith('sms_')) {
+
       }
 
       if (btnId.startsWith('sold_')) {
@@ -79,7 +87,7 @@ $(function() {
 
     });
 
-  }
+  };
 
   $('#searchForm').on('submit', function(event) {
     event.preventDefault();
@@ -100,6 +108,8 @@ $(function() {
                   <div id="btn-group" class="btn-group" role="group" aria-label="Basic example">
                   <button type="button" class="btn btn-success" value="${element.id}">Mark as my favourite</button>
                   <button type="button" class="btn btn-primary" value="${element.id}" name="${element.username}">Leave a message</button>
+                  <button type="button" class="btn btn-primary" value="${element.id}" id="email_${element.id}">Email me</button>
+                  <button type="button" class="btn btn-primary" value="${element.id}" id="sms_${element.id}">Text me</button>
                   <button type="button" class="btn btn-warning" value="${element.id}">Mark as sold</button>
                   <button type="button" class="btn btn-danger" value="${element.id}">Delete</button>
                   </div>
@@ -115,7 +125,7 @@ $(function() {
   });
   buttonEventHandler();
 
-  $(':button').on('click', (event) => {
+  $('#msgCardBody :button').on('click', (event) => {
     const btnValue = $(event.currentTarget).val();
     const params = btnValue.split(",");
     const toUserId = params[0];
