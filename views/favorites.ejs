@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="/vendor/border-box.css" />
   <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
-  <link rel="stylesheet" href="/styles/favorites.css">
+  <link rel="stylesheet" href="/styles/favorites.css" />
 
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
@@ -42,7 +42,7 @@
         </div>
         <div class="card-info-container">
           <div class="card-info title-status">
-            <h5><%= item.title %></h5>
+            <h5><%= item.title %> : $<%= item.price %></h5>
             <% if(item.status) { %>
               <span class="status <%= item.status.toLowerCase() %>"><%= item.status %></span>
             <% } else { %>
@@ -53,10 +53,11 @@
             <p><%= item.description %></p>
           </div>
           <div class="card-info date-icons">
-            <span><%= item.date %></span>
+            <span><%= item.date.getFullYear() %>-<%= (item.date.getMonth() + 1) %>-<%= item.date.getDate() %></span>
             <div class="icons">
               <!-- Add icon elements here -->
             </div>
+            <button class="delete-button">Delete</button>
           </div>
         </div>
       </div>
