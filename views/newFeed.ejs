@@ -21,7 +21,7 @@
   <body>
     <h1>Publish a new feed.</h1>
     <div class="container-fluid">
-      <form action="/api/feeds/new" method="post" id="newFeedForm" name="newFeedForm">
+      <form action="/api/feeds/new" method="post" id="newFeedForm" name="newFeedForm" enctype="multipart/form-data">
         <div class="mb-3">
           <label for="feedTitle" class="form-label">Title:&nbsp;</label>
           <input type="text" class="form-control" id="feedTitle" name="feedTitle" aria-describedby="titleHelp">
@@ -33,7 +33,7 @@
         </div>
         <div class="mb-3">
           <label for="feedImage" class="form-label">Image:&nbsp;</label>
-          <input type="text" class="form-control" id="feedImage" name="feedImage">
+          <input type="file" class="form-control" id="feedImage" name="feedImage">
         </div>
         <div class="mb-3">
           <label for="feedDesc" class="form-label">Description:&nbsp;</label>

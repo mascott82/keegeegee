@@ -42,24 +42,22 @@
           <div class="card-body">
             <img src="<%= feeds[i].image_url %>" class="card-img-top" alt="...">
             <div class="card-body">
-              <img src="<%= feeds[i].image_url %>" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title"><%= feeds[i].title %></h5>
-                <p class="card-text"><%= feeds[i].description %></p>
-                <p class="card-text"><%= feeds[i].username %></p>
-                <p class="card-text"><%= feeds[i].email %></p>
-                <p class="card-text"><%= feeds[i].created_at %></p>
-                <div class="btn-group" role="group" aria-label="Basic example">
-                  <button type="button" class="btn btn-success" value="<%= feeds[i].id %>" id="fav_<%= feeds[i].id %>">Mark as my favourite</button>
-                  <button type="button" class="btn btn-primary" value="<%= feeds[i].id %>" id="msg_<%= feeds[i].id %>" name="<%= feeds[i].username %>,<%= feeds[i].user_id %>,<%= feeds[i].id%>,<%= feeds[i].pid%>">Leave a message</button>
-                  <button type="button" class="btn btn-info" value="<%= feeds[i].id %>" id="email_<%= feeds[i].id %>" value="<%= feeds[i].email %>">Email me</button>
-                  <button type="button" class="btn btn-secondary" value="<%= feeds[i].id %>" id="sms_<%= feeds[i].id %>" name="<%= feeds[i].username %>,<%= feeds[i].user_id %>,<%= feeds[i].id%>,<%= feeds[i].pid%>,<%= feeds[i].phone_number %>">Text me</button>
-                  <button type="button" class="btn btn-warning" value="<%= feeds[i].id %>" id="sold_<%= feeds[i].id %>">Mark as sold</button>
-                  <button type="button" class="btn btn-danger" value="<%= feeds[i].id %>" id="del_<%= feeds[i].id %>">Delete</button>
-                </div>
+              <h5 class="card-title"><%= feeds[i].title %></h5>
+              <p class="card-text"><%= feeds[i].description %></p>
+              <p class="card-text"><%= feeds[i].username %></p>
+              <p class="card-text"><%= feeds[i].email %></p>
+              <p class="card-text"><%= feeds[i].created_at %></p>
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-success" value="<%= feeds[i].id %>" id="fav_<%= feeds[i].id %>">Mark as my favourite</button>
+                <button type="button" class="btn btn-primary" value="<%= feeds[i].id %>" id="msg_<%= feeds[i].id %>" name="<%= feeds[i].username %>,<%= feeds[i].user_id %>,<%= feeds[i].id%>,<%= feeds[i].pid%>">Leave a message</button>
+                <button type="button" class="btn btn-info" value="<%= feeds[i].id %>" id="email_<%= feeds[i].id %>" value="<%= feeds[i].email %>">Email me</button>
+                <button type="button" class="btn btn-secondary" value="<%= feeds[i].id %>" id="sms_<%= feeds[i].id %>" name="<%= feeds[i].username %>,<%= feeds[i].user_id %>,<%= feeds[i].id%>,<%= feeds[i].pid%>,<%= feeds[i].phone_number %>">Text me</button>
+                <button type="button" class="btn btn-warning" value="<%= feeds[i].id %>" id="sold_<%= feeds[i].id %>">Mark as sold</button>
+                <button type="button" class="btn btn-danger" value="<%= feeds[i].id %>" id="del_<%= feeds[i].id %>">Delete</button>
               </div>
             </div>
           </div>
+        </div>
         <% } %>
         </div>
         <div class="modal fade" id="msgModal" tabindex="-1" aria-labelledby="msgModalLabel" aria-hidden="true">

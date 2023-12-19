@@ -10,19 +10,34 @@ const router  = express.Router();
 
 const feed = require('../db/queries/feeds');
 
-router.post('/new', (req, res) => {
+const multer = require('multer');
+const path = require('path');
+
+// Set up Multer for handling file uploads
+const storage = multer.diskStorage({
+  destination:  'uploads/',
+  filename: (req, file, cb) => {
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({ storage: storage });
+
+router.post('/new', upload.single('feedImage'), (req, res) => {
   const title = req.body.feedTitle;
   const price = req.body.feedPrice;
-  const imageUrl = req.body.feedImage;
+  // const imageUrl = req.body.feedImage;
+  const imageUrl = req.file ? req.file.filename : '';
   const description = req.body.feedDesc;
+  const userId = req.session.userId ? req.session.userId : 3;
 
   const newFeed = {
     title:  title,
     price:  price,
-    imageUrl: imageUrl,
+    imageUrl: `http://localhost:8080/uploads/${imageUrl}`,
     desc: description,
     isAvailable:  true,
-    userId: 3
+    userId: userId
   };
 
   feed.addFeed(newFeed)

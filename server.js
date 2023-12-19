@@ -32,6 +32,7 @@ app.use(
   })
 );
 app.use(express.static('public'));
+app.use('/uploads', express.static('uploads'));
 
 // Use body-parser middleware to parse JSON and URL-encoded data
 app.use(bodyParser.json());
