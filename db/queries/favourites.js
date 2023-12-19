@@ -26,6 +26,7 @@ const getFavourites = (_userid) => {
   console.log(_qryString);
   return db.query(_qryString)
     .then(data => {
+      console.log("datavalue", data.rows);
       return data.rows;  // rows will have id, user_id, item_listing_id, created_at
     })
     .catch(error => {
@@ -50,10 +51,11 @@ const addFavourite = (favourite) => {
 
 const deleteFavourite = (favId) =>{
   // with the given favId, delete corresponding row from favourites table
-  let _deleteQry = `DELETE FROM favourites WHERE id = ${favId}`;  // complete query by using string interpolation
+  let _deleteQry = `DELETE FROM favourites WHERE id = ${favId};`;  // complete query by using string interpolation
   db.query(_deleteQry)  // db is middle guy and handle with the given query
-    .then(() =>{  // db.query is async, need "then" for success case
-      console.log("Deleting favorite succeeded");
+    .then((data) => {  // db.query is async, need "then" for success case
+      console.log("Deleting favorite succeeded", data);
+      return data.rows;
     })
     .catch(err => {  // async, need "catch" for fail case
       console.error('Error in deleting favorite row', err); throw err;
