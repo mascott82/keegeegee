@@ -1,77 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title>Keegeegee - My Favorites</title>
 
-<head>
-  <title>Keegeegee - My Favorites</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <meta charset="UTF-8" >
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="stylesheet" href="/styles/layout.css" />
+    <link rel="stylesheet" href="/styles/favorites.css" />
 
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" />
-  <link rel="stylesheet" href="/styles/main.css" />
-  <link rel="stylesheet" href="/styles/layout.css" />
-  <link rel="stylesheet" href="/styles/favorites.css" />
+    <script src="/vendor/jquery-3.0.0.js"></script>
+    <script defer src="/scripts/app.js"></script>
+  </head>
 
-  <script src="/vendor/jquery-3.0.0.js"></script>
-  <script defer src="/scripts/app.js"></script>
-
-</head>
-
-<body>
-  <div class="container">
-    <div class="header">
-      <h1>My Favorites</h1>
-      <form id="sortForm">
-        <select name="sortby" onchange="document.getElementById('sortForm').submit();">
-          <option value="default">Sort By</option>
-          <option value="price_asc">Price: Low to High</option>
-          <option value="price_desc">Price: High to Low</option>
-          <option value="date_asc">Date: Old to New</option>
-          <option value="date_desc">Date: New to Old</option>
-          <option value="availability">Availability</option>
-        </select>
-      </form>
-    </div>
-    <% favorites.forEach(function(item) { %>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>My Favorites</h1>
+        <form id="sortForm">
+          <select
+            name="sortby"
+            onchange="document.getElementById('sortForm').submit();"
+          >
+            <option value="default">Sort By</option>
+            <option value="price_asc">Price: Low to High</option>
+            <option value="price_desc">Price: High to Low</option>
+            <option value="date_asc">Date: Old to New</option>
+            <option value="date_desc">Date: New to Old</option>
+            <option value="availability">Availability</option>
+          </select>
+        </form>
+      </div>
+      <% favorites.forEach(function(item) { %>
       <div class="card">
         <div class="card-image-container">
-          <img src="<%= item.image_url %>" alt="Item image" class="card-image">
+          <img
+            src="<%= item.image_url %>"
+            alt="Item image"
+            class="card-image"
+          />
         </div>
         <div class="card-info-container">
           <div class="card-info title-status">
             <h5><%= item.title %> : $<%= item.price %></h5>
             <% if(item.status) { %>
-              <span class="status <%= item.status.toLowerCase() %>"><%= item.status %></span>
+            <span class="status <%= item.status.toLowerCase() %>"
+              ><%= item.status %></span
+            >
             <% } else { %>
-              <span class="status">No Status</span>
+            <span class="status">No Status</span>
             <% } %>
           </div>
           <div class="card-info description">
             <p><%= item.description %></p>
           </div>
           <div class="card-info date-icons">
-            <span><%= item.created_at.getFullYear() %>-<%= (item.created_at.getMonth() + 1) %>-<%= item.created_at.getDate() %> by <%= item.username %></span>
+            <span
+              ><%= item.created_at.getFullYear() %>-<%=
+              (item.created_at.getMonth() + 1) %>-<%= item.created_at.getDate()
+              %> by <%= item.username %></span
+            >
             <div class="icons">
               <!-- Add icon elements here -->
             </div>
-            <button class="delete-button">Delete</button>
+            <button class="delete-button" data-id="<%= item.item_listing_id %>">
+              Delete <%= item.item_listing_id %>
+            </button>
           </div>
         </div>
       </div>
-    <% }); %>
+      <% }); %>
 
-    <button class="btn-load-more">Load more</button>
-  </div>
-  <script>
-    // This script will submit the form when you change the selection.
-    // Actual sorting logic will be handled server-side.
-    document.getElementById('sortForm').addEventListener('change', function() {
-      this.submit();
-    });
-  </script>
+      <button class="btn-load-more">Load more</button>
+    </div>
+    <script>
+      // This script will submit the form when you change the selection.
+      // Actual sorting logic will be handled server-side.
+      document
+        .getElementById("sortForm")
+        .addEventListener("change", function () {
+          this.submit();
+        });
 
-</body>
+      const delBtns = document.querySelectorAll(".delete-button");
+      // console.log(delBtns);
+      delBtns.forEach((item) => {
+        item.addEventListener("click", function () {
+          //  console.log(item);
+          //  console.log(item.getAttribute("data-id"));
+          const listing_id = item.getAttribute("data-id");
+          //  doDelete(listing_id)
+          $.ajax({
+            url: `/api/fav/${listing_id}`,
+            method: "DELETE",
+            success: function (response) {
+              if (response.success) {
+                $(`button[data-id='${listing_id}']`).closest(".card").remove();
+              }
+            },
+            error: function (error) {
+              console.error("Error:", error);
+            },
+          });
+        });
+      });
 
+      function doDelete(_id) {
+        console.log("abcd", _id);
+        $.ajax({
+          url: `/api/fav/${_id}`,
+          method: "DELETE",
+          success: function (response) {
+            if (response.success) {
+              $(`button[data-id='${_id}']`).closest(".card").remove();
+            }
+          },
+          error: function (error) {
+            console.error("Error:", error);
+          },
+        });
+      }
+
+      // $('.delete-button').on('click',doDelete($(this).data("id")));
+      // $('.delete-button').on('click', function() {
+      //   var itemId = $(this).data('id');
+      //   doDelete(itemId);
+      //   console.log(itemId);
+      // });
+    </script>
+  </body>
 </html>

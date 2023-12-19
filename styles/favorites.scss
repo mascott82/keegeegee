@@ -2,13 +2,16 @@ body {
   font-family: sans-serif;
 }
 .container {
-  width: 80%;
-  margin: 0 auto;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  margin: auto;
+  // box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
 }
 
 .header {
+  width: 100%;
+  margin: auto;
+  max-width: 1200px;
   display: flex;
   text-align: center;
   justify-content: space-between;
@@ -54,14 +57,14 @@ select {
 }
 .card-info-container {
   flex-grow: 1;
-  background-color: #e3deda;
+  background-color: white;
   display: flex;
   flex-direction: column;
 }
 
 .card-info {
   padding: 10px;
-  background-color: #f2ede9;
+  background-color: white;
   margin: 5px;
 }
 
