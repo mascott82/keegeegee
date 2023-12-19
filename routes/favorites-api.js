@@ -12,7 +12,7 @@ const favs = require('../db/queries/favourites');
 
 router.post('/:id', (req, res) => {
   const feedId = req.body.feedId;
-  const userId = 1;
+  const userId = req.body.userId;
 
   const favourite = {
     itemId: feedId,

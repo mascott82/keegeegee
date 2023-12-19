@@ -1,14 +1,14 @@
 const db = require('../connection');
 
 const getMessages = () => {
-  return db.query(`SELECT * FROM messages`)
+  return db.query(`SELECT * FROM messages ORDER BY created_at DESC`)
     .then(data => {
       return data.rows;
     });
 };
 
 const getMessagesByUser = (id) => {
-  return db.query(`SELECT * FROM messages WHERE to_user_id = $1`,
+  return db.query(`SELECT * FROM messages WHERE to_user_id = $1 ORDER BY created_at DESC`,
     [id])
     .then(data => {
       return data.rows;
