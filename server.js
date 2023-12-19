@@ -5,7 +5,7 @@ require('dotenv').config();
 const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
-const session = require('express-session')
+const session = require('express-session');
 const bodyParser = require('body-parser');
 
 const PORT = process.env.PORT || 8080;

@@ -36,7 +36,7 @@ const _customSortQryResult = function(_qryResult, _sortPolicy) {
 };
 
 router.get('/favorites', (req, res) => {
-  req.session.loginstatus = {userid:2};  // TODO: replace this hard-coded loginstatus with actual session cookies
+  req.session.loginstatus = {userid:1};  // TODO: replace this hard-coded loginstatus with actual session cookies
   if (req.session.loginstatus) {
     // request user's favorites information against database via query
     favQry.getFavourites(req.session.loginstatus.userid).then(favs => {

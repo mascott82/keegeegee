@@ -56,7 +56,7 @@
             <div class="icons">
               <!-- Add icon elements here -->
             </div>
-            <button class="delete-button">Delete</button>
+            <button class="delete-button" data-id="<%= item.id %>">Delete</button>
           </div>
         </div>
       </div>
@@ -71,6 +71,53 @@
       this.submit();
     });
   </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+  $(document).ready(function() {
+      $('.delete-button').on('click', function() {
+          var itemId = $(this).data('id');
+
+          $.ajax({
+              url: '/api/fav/' + itemId, // REST API 경로
+              method: 'DELETE',
+              success: function(response) {
+                  // 성공 시, 항목 제거
+                  $(`button[data-id='${_id}']`).closest('.card').remove();
+              },
+              error: function(error) {
+                  console.error('Error:', error);
+              }
+          });
+      });
+  });
+  </script>
+
+    <!-- $(document).ready(function() {
+      function doDelete(_id){
+        console.log(_id);
+        $.ajax({
+          url: `/api/fav/${_id}`,
+          method: 'DELETE',
+          success: function(response) {
+            if (response.success) {
+              $(`button[data-id='${_id}']`).closest('.card').remove();
+            }
+          },
+          error: function(error) {
+            console.error('Error:', error);
+          }
+        });
+      }
+
+      // $('.delete-button').on('click',doDelete($(this).data("id")));
+      $('.delete-button').on('click', function() {
+        var itemId = $(this).data("id"); // 현재 클릭된 버튼의 data-id 속성값을 읽음
+        console.log("itemId");
+        console.log(itemId);
+        doDelete(itemId); // doDelete 함수에 itemId 값을 전달
+      });
+    });
+  </script> -->
 
 </body>
 

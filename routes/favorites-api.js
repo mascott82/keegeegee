@@ -28,4 +28,17 @@ router.post('/:id', (req, res) => {
     });
 });
 
+
+router.delete('/:id', (req, res) => {
+  console.log("ping coming");
+  const favId = req.params.id;
+  favs.deleteFavourite(favId)
+    .then(() => {
+      res.json({ success: true });
+    })
+    .catch(error => {
+      console.error("Error deleting the item: ", error);
+      res.status(500).json({ success: false });
+    });
+});
 module.exports = router;
