@@ -26,6 +26,7 @@ $(function() {
         const userName = msgHeader[0];
         const toUserId = msgHeader[1];
         const feedId = msgHeader[2];
+        const pid = msgHeader[3] ? msgHeader[3] : 0;
 
         const fromUserId = 1;
 
@@ -33,7 +34,16 @@ $(function() {
         $("#msgModal").modal('show');
 
         $('#msgModalSubmit').on('click', function(event) {
-          console.log("===", userName, fromUserId, toUserId, feedId);
+          $.post('/api/msg/new', {
+            fromUserId: fromUserId,
+            toUserId: toUserId,
+            itemId: feedId,
+            content: $("#message-text").val(),
+            pid: pid
+          })
+            .done(function(res) {
+              console.log(res.message);
+            });
 
           $("#msgModal").modal('hide');
         });

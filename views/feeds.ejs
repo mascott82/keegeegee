@@ -46,7 +46,7 @@
               <p class="card-text"><%= feeds[i].created_at %></p>
               <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-success" value="<%= feeds[i].id %>" id="fav_<%= feeds[i].id %>">Mark as my favourite</button>
-                <button type="button" class="btn btn-primary" value="<%= feeds[i].id %>" id="msg_<%= feeds[i].id %>" name="<%= feeds[i].username %>,<%= feeds[i].user_id %>,<%= feeds[i].id%>">Leave a message</button>
+                <button type="button" class="btn btn-primary" value="<%= feeds[i].id %>" id="msg_<%= feeds[i].id %>" name="<%= feeds[i].username %>,<%= feeds[i].user_id %>,<%= feeds[i].id%>,<%= feeds[i].pid%>">Leave a message</button>
                 <button type="button" class="btn btn-warning" value="<%= feeds[i].id %>" id="sold_<%= feeds[i].id %>">Mark as sold</button>
                 <button type="button" class="btn btn-danger" value="<%= feeds[i].id %>" id="del_<%= feeds[i].id %>">Delete</button>
               </div>
