@@ -35,4 +35,15 @@ router.post('/new', (req, res) => {
     });
 });
 
+router.get('/list', (req, res) => {
+  const toUserId = req.session.userId;
+  msgs.getMessagesByUser(toUserId)
+    .then((result) => {
+      console.log(result);
+    })
+    .catch(error => {
+      console.error("Error retrieving the message. ", error);
+    });
+});
+
 module.exports = router;

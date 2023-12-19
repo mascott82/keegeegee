@@ -19,14 +19,16 @@ router.post("/", (req, res) => {
       if (data.length === 0) {
         return res.status(403).send("Email or password is incorrect. Please try again.");
       }
-      const username = data[0].username
+      const username = data[0].username;
+      const userId = data[0].id;
       req.session.username = username;
-      res.redirect("/f/feeds")
+      req.session.userId = userId;
+      res.redirect("/f/feeds");
     })
     .catch(error => {
       console.error('Error searching user: ', error);
     });
-})
+});
 
 /* router.post("/logout", (req, res) => {
   req.cookie = null;
