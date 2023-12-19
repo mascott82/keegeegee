@@ -4,7 +4,7 @@ const users = require('../db/queries/users');
 const { getUsers, addUser, loginUser } = require('../db/queries/users')
 
 router.get('/', (req, res) => {
-  res.render('register');
+  res.render('register', users);
 });
 
 router.post('/', (req, res) => {
