@@ -28,8 +28,6 @@ $(function() {
         const feedId = msgHeader[2];
         const pid = msgHeader[3] ? msgHeader[3] : 0;
 
-        const fromUserId = 1;
-
         $("#recipient-name").val('@' + userName);
         $("#msgModal").modal('show');
 
@@ -115,6 +113,42 @@ $(function() {
         });
       });
   });
-
   buttonEventHandler();
+
+  $(':button').on('click', (event) => {
+    const btnValue = $(event.currentTarget).val();
+    const params = btnValue.split(",");
+    const toUserId = params[0];
+    const pid = params[1];
+    const itemId = params[2];
+    const toUserName = params[3];
+
+    $("#recipient-name").val('@' + toUserName);
+    $("#msgModal").modal('show');
+
+    $('#msgModalSubmit').on('click', function(event) {
+
+      $.post('/api/msg/reply', {
+        toUserId: toUserId,
+        itemId: itemId,
+        pid: pid,
+      })
+        .done(function(res) {
+          if (res.message === 1) {
+            console.log("Message sent");
+          }
+        })
+        .fail(function(jqXHR, textStatus, errorThrown) {
+          console.error('Error:', errorThrown);
+        });
+
+      $("#msgModal").modal('hide');
+    });
+
+    // Event handler for hiding the modal and clearing content
+    $('#msgModal').on('hide.bs.modal', () => {
+      $("#recipient-name").val('');
+      $("#message-text").val('');
+    });
+  });
 });

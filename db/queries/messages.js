@@ -8,7 +8,16 @@ const getMessages = () => {
 };
 
 const getMessagesByUser = (id) => {
-  return db.query(`SELECT * FROM messages WHERE to_user_id = $1 ORDER BY created_at DESC`,
+  const querySql = `
+    SELECT m.*, u.username AS fromusername, il.image_url AS imageurl, il.title AS itemtitle
+    FROM messages AS m
+    INNER JOIN users AS u ON u.id = m.from_user_id
+    INNER JOIN item_listing AS il ON il.id = m.item_listing_id
+    WHERE m.to_user_id = $1
+    ORDER BY created_at DESC
+  `;
+  // return db.query(`SELECT * FROM messages WHERE to_user_id = $1 ORDER BY created_at DESC`,
+  return db.query(querySql,
     [id])
     .then(data => {
       return data.rows;
