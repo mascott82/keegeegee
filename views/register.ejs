@@ -37,13 +37,19 @@
       <form method="POST" action="/register" class="register-right-page">
 
         <label class="register-title">Username:</label>
-        <input class="register-input" type="text" name="username" placeholder="Enter a username">
+        <input class="register-input" type="text" name="username" placeholder="Create a username" required>
+
+        <div class="phone-input">
+          <label class="register-title">Phone Number:</label>
+          <input class="register-input" type="text" name="phone_number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="Type your phone number" required>
+          <span id="phone-number-input">*Format: xxx-xxx-xxxx (numbers only)</span>
+        </div >
 
         <label class="register-title">Email:</label>
-        <input class="register-input" type="email" name="email" placeholder="Type your email">
+        <input class="register-input" type="email" name="email" placeholder="Type your email" required>
 
         <label class="register-title">Enter Password:</label>
-        <input class="register-input" type="password" name="password" placeholder="Type your password">
+        <input class="register-input" type="password" name="password" placeholder="Type your password" required>
 
 
         <button class="submit-btn">Submit</button>
