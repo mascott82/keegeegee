@@ -34,9 +34,29 @@
 }
 
 .nav-link-right{
-  padding: 0.1rem;
+  padding: 0.2rem;
+}
+
+.nav-user {
+  padding-right: 1rem;
+  padding-left: 0.25rem;
 }
 
 a {
   text-decoration: none;
+}
+
+.nav-logout {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.logout-btn {
+  border: none;
+  padding: 0.25rem 1rem;
+  border-radius: 30px;
+  background-color: purple;
+  color: white;
 }

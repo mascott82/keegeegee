@@ -20,6 +20,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js" integrity="sha512-X/YkDZyjTf4wyc2Vy16YGCPHwAY8rZJY+POgokZjQB2mhIRFJCckEGc6YyX9eNsPfn0PzThEuNs+uaomE5CO6A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   </head>
 
+<<<<<<< HEAD
   <body>
     <div class="container-fluid">
       <h1>Feeds</h1>
@@ -36,6 +37,29 @@
       <div id="feedsList">
         <% for (let i = 0; i < feeds.length; i++) { %>
           <div class="card mb-3" id="cardbox_<%= feeds[i].id %>">
+=======
+<body>
+
+  <%- include('partials/_header') %>
+
+  <div class="container-fluid">
+    <h1>Feeds</h1>
+    <form id="searchForm" action="/s/search" method="post">
+      <div class="input-group mb-3" id="searchBox">
+        <span class="input-group-text" id="inputGroup-sizing-default">Looking for price: </span>
+        <span class="input-group-text" id="inputGroup-sizing-default">from: $</span>
+        <input id="minPrice" name="minPrice" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        <span class="input-group-text" id="inputGroup-sizing-default">to: $</span>
+        <input id="maxPrice" name="maxPrice" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        <button class="btn btn-outline-secondary" type="submit" id="searchBtn">Search</button>
+      </div>
+    </form>
+    <div id="feedsList">
+      <% for (let i = 0; i < feeds.length; i++) { %>
+        <div class="card mb-3" id="cardbox_<%= feeds[i].id %>">
+          <div class="card-body">
+            <img src="<%= feeds[i].image_url %>" class="card-img-top" alt="...">
+>>>>>>> header
             <div class="card-body">
               <img src="<%= feeds[i].image_url %>" class="card-img-top" alt="...">
               <div class="card-body">

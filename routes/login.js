@@ -6,8 +6,8 @@ const users = require('../db/queries/users');
 router.get('/', (req, res) => {
   users.getUsers()
     .then(data => {
-      console.log({data})
-      res.render('login', { data });
+      const templateVars = { username: req.session.username, userId: req.session.userId, data }
+      res.render('login', templateVars );
     })
 });
 
@@ -27,17 +27,13 @@ router.post("/", (req, res) => {
       const userId = data[0].id;
       req.session.username = username;
       req.session.userId = userId;
+
       res.redirect("/f/feeds");
     })
     .catch(error => {
       console.error('Error searching user: ', error);
     });
 });
-
-/* router.post("/logout", (req, res) => {
-  req.cookie = null;
-  res.redirect("/");
-}); */
 
 module.exports = router;
 
