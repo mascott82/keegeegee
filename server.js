@@ -51,6 +51,7 @@ const registerRoutes = require('./routes/register');
 const feedsApiRoutes = require('./routes/feeds-api');
 const favoritesApiRoutes = require('./routes/favorites-api');
 const messageApiRoutes = require('./routes/message-api');
+const messageRoutes = require('./routes/message');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -67,6 +68,7 @@ app.use('/register', registerRoutes);
 app.use('/api/feeds', feedsApiRoutes);
 app.use('/api/fav', favoritesApiRoutes);
 app.use('/api/msg', messageApiRoutes);
+app.use('/m', messageRoutes);
 
 // Note: mount other resources here, using the same pattern above
 

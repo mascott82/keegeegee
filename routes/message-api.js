@@ -11,7 +11,7 @@ const router  = express.Router();
 const msgs = require('../db/queries/messages');
 
 router.post('/new', (req, res) => {
-  const fromUserId = req.body.fromUserId;
+  const fromUserId = req.session.userId ? req.session.userId : 1;
   const toUserId = req.body.toUserId;
   const itemId = req.body.itemId;
   const content = req.body.content;
@@ -35,14 +35,26 @@ router.post('/new', (req, res) => {
     });
 });
 
-router.get('/list', (req, res) => {
-  const toUserId = req.session.userId;
-  msgs.getMessagesByUser(toUserId)
-    .then((result) => {
-      console.log(result);
+router.post('/reply', (req, res) => {
+  const fromUserId = req.session.userId ? req.session.userId : 1;
+  const toUserId = Number(req.body.toUserId);
+  const itemId = Number(req.body.itemId);
+  const pid = Number(req.body.pid);
+  const content = req.body.content;
+
+  msgs.addMessage({
+    fromUserId: fromUserId,
+    toUserId: toUserId,
+    itemId: itemId,
+    pid:  pid,
+    content:  content
+  })
+    .then(() => {
+      console.log('Message sending successfully! ');
+      res.send({ message: 1 });
     })
     .catch(error => {
-      console.error("Error retrieving the message. ", error);
+      console.error("Error sending the message. ", error);
     });
 });
 
