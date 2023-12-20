@@ -35,7 +35,9 @@
           </select>
         </form>
       </div>
+      <div id="hidden-length" hidden="hidden" class="info"><%= favorites.length %></div>
       <% favorites.forEach(function(item) { %>
+      <div id="hidden-userid" hidden="hidden" class="info"><%= item.user_id %></div>
       <div class="card">
         <div class="card-image-container">
           <img
@@ -74,8 +76,7 @@
         </div>
       </div>
       <% }); %>
-
-      <button class="btn-load-more">Load more</button>
+      <button id="load-more" class="btn-load-more">Load more</button>
     </div>
     <script>
       // This script will submit the form when you change the selection.
@@ -123,13 +124,27 @@
           },
         });
       }
-
-      // $('.delete-button').on('click',doDelete($(this).data("id")));
-      // $('.delete-button').on('click', function() {
-      //   var itemId = $(this).data('id');
-      //   doDelete(itemId);
-      //   console.log(itemId);
-      // });
+    </script>
+    <script>
+      document.querySelectorAll('.delete-button').forEach(button => {
+        button.addEventListener('click', function() {
+          window.location.reload();
+        });
+      });
+    </script>
+    <script>
+      document.getElementById('load-more').addEventListener('click', function() {
+        // after load-more button click, trigger get("/fav/favorites")
+        console.log(`hidden-length.innerText = ${document.getElementById('hidden-length').innerText}`);
+        const increaseRowLength = 2;  // TODO: change this to actual value, such as 10 or 20...
+        const userId= document.getElementById('hidden-userid').innerText
+        const rowLimit= Number(document.getElementById('hidden-length').innerText) + increaseRowLength
+        console.log("userId, rowLimit");
+        console.log(userId, rowLimit);
+        const _url = `/fav/favorites/${userId}/${rowLimit}`
+        console.log(_url);
+        window.location.href = _url;
+      });
     </script>
   </body>
 </html>

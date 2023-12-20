@@ -12,12 +12,15 @@ const favs = require("../db/queries/favourites");
 
 router.post("/:id", (req, res) => {
   const feedId = req.body.feedId;
-  const userId = req.body.userId;
+  // const userId = req.body.userId;  // TODO : make sure req.body has userID
+  const userId = 1;  // TODO: remove this hard-coded userId =1, onnce req.body has userId
 
   const favourite = {
     itemId: feedId,
     userId: userId,
   };
+  console.log("favourite: with itemId, userId");
+  console.log(favourite);
   favs
     .addFavourite(favourite)
     .then(() => {
