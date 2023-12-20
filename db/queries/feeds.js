@@ -16,22 +16,26 @@ const getFeeds = () => {
 };
 
 const getFeedsByPrice = (minPrice, maxPrice) => {
-  let query = 'SELECT * FROM item_listing';
+  let query = `
+    SELECT il.*, u.username AS username, u.email AS email
+    FROM item_listing AS il
+    INNER JOIN users AS u ON u.id = il.user_id
+  `;
   let params = [];
   if (minPrice !== null && minPrice !== 'undefined' && minPrice !== '') {
-    query += ' WHERE price >= $1';
+    query += ' WHERE il.price >= $1';
     params.push(minPrice);
     if (maxPrice !== null && maxPrice !== 'undefined' && maxPrice !== '') {
-      query += ' AND price <= $2';
+      query += ' AND il.price <= $2';
       params.push(maxPrice);
     }
   } else {
     if (maxPrice !== null && maxPrice !== 'undefined' && maxPrice !== '') {
-      query += ' WHERE price <= $1';
+      query += ' WHERE il.price <= $1';
       params.push(maxPrice);
     }
   }
-  query += ' ORDER BY created_at DESC';
+  query += ' ORDER BY il.created_at DESC';
 
   return db.query(query, params)
     .then(data => {
@@ -40,6 +44,22 @@ const getFeedsByPrice = (minPrice, maxPrice) => {
     .catch(error => {
       console.error('Error fetching item: ', error);
       throw error;
+    });
+};
+
+const getFeedsByUser = (userId) => {
+  const querySql = `
+    SELECT il.*, u.username AS username, u.email AS email
+    FROM item_listing AS il
+    INNER JOIN users AS u ON u.id = il.user_id
+    WHERE il.user_id = $1
+    ORDER BY created_at DESC
+  `;
+
+  // return db.query('SELECT * FROM item_listing ORDER BY created_at DESC')
+  return db.query(querySql, [userId])
+    .then(data => {
+      return data.rows;
     });
 };
 
@@ -81,4 +101,4 @@ const updateFeedAvailability = (id, isAvailable) => {
     });
 };
 
-module.exports = { getFeeds, getFeedsByPrice, addFeed, deleteFeed, updateFeedAvailability };
+module.exports = { getFeeds, getFeedsByPrice, getFeedsByUser, addFeed, deleteFeed, updateFeedAvailability };

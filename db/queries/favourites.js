@@ -65,4 +65,19 @@ const deleteFavourite = (favId) =>{
       console.error('Error in deleting favorite row', err); throw err;
     });
 };
-module.exports = { getFavourites, addFavourite, deleteFavourite };
+
+const getFavouriteByUserIdAndItemId = (userId, itemId) => {
+  const querySql = `
+    SELECT * FROM favourites WHERE user_id = $1 AND item_listing_id = $2
+  `;
+  return db.query(querySql, [userId, itemId])
+    .then((data) => {
+      console.log("Favourite item found successfully!", data);
+      return data.rows;
+    })
+    .catch(err => {
+      console.error('Error in deleting favorite row', err); throw err;
+    });
+};
+
+module.exports = { getFavourites, addFavourite, deleteFavourite, getFavouriteByUserIdAndItemId };
