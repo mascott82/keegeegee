@@ -4,9 +4,14 @@
   justify-content: space-between;
   align-items: center;
   width: 100vw;
-  background-color: aqua;
+  background-color: #3d405b;
+  color: #EAE3EA;
   padding: 0 3rem;
+  height: 10vh;
   margin: 0 auto;
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
 .nav-bar-left {
@@ -31,7 +36,16 @@
 
 .nav-link-left {
   padding: 1rem 0 1rem 0.5rem;
+  color: #EAE3EA;
+  text-decoration: none;
 }
+
+.nav-link-left :visited{
+  padding: 1rem 0 1rem 0.5rem;
+  color: #EAE3EA;
+  text-decoration: none;
+}
+
 
 .nav-link-right{
   padding: 0.2rem;
@@ -41,18 +55,12 @@
   padding-right: 1rem;
   padding-left: 0.25rem;
 }
-
-a {
-  text-decoration: none;
-}
-
 .nav-logout {
   display: flex;
   flex-direction: row;
   align-items: center;
   margin: 0 auto;
 }
-
 
 .search-btn {
   border: none;
@@ -62,6 +70,7 @@ a {
 .user-btn {
   border: none;
   background-color: transparent;
+  color: #EAE3EA;
 }
 
 .user-btn:hover {
@@ -83,7 +92,7 @@ a {
   width: 100%;
   border: none;
   float: none;
-  color: black;
+  color: #000000;
   padding: 1rem;
   text-decoration: none;
   display: block;
