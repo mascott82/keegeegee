@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <title>Keegeegee - My Favorites</title>
 
@@ -12,6 +13,10 @@
     <link rel="stylesheet" href="/styles/main.css" />
     <link rel="stylesheet" href="/styles/layout.css" />
     <link rel="stylesheet" href="/styles/favorites.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700;800&family=Spectral:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet">
 
     <script src="/vendor/jquery-3.0.0.js"></script>
     <script defer src="/scripts/app.js"></script>
@@ -22,10 +27,7 @@
       <div class="header">
         <h1>My Favorites</h1>
         <form id="sortForm">
-          <select
-            name="sortby"
-            onchange="document.getElementById('sortForm').submit();"
-          >
+          <select name="sortby" onchange="document.getElementById('sortForm').submit();">
             <option value="default">Sort By</option>
             <option value="price_asc">Price: Low to High</option>
             <option value="price_desc">Price: High to Low</option>
@@ -35,48 +37,50 @@
           </select>
         </form>
       </div>
-      <div id="hidden-length" hidden="hidden" class="info"><%= favorites.length %></div>
-      <% favorites.forEach(function(item) { %>
-      <div id="hidden-userid" hidden="hidden" class="info"><%= item.user_id %></div>
-      <div class="card">
-        <div class="card-image-container">
-          <img
-            src="<%= item.image_url %>"
-            alt="Item image"
-            class="card-image"
-          />
-        </div>
-        <div class="card-info-container">
-          <div class="card-info title-status">
-            <h5><%= item.title %> : $<%= item.price %></h5>
-            <% if(item.status) { %>
-            <span class="status <%= item.status.toLowerCase() %>"
-              ><%= item.status %></span
-            >
-            <% } else { %>
-            <span class="status">No Status</span>
-            <% } %>
-          </div>
-          <div class="card-info description">
-            <p><%= item.description %></p>
-          </div>
-          <div class="card-info date-icons">
-            <span
-              ><%= item.created_at.getFullYear() %>-<%=
-              (item.created_at.getMonth() + 1) %>-<%= item.created_at.getDate()
-              %> by <%= item.username %></span
-            >
-            <div class="icons">
-              <!-- Add icon elements here -->
-            </div>
-            <button class="delete-button" data-id="<%= item.id %>">
-              Delete
-            </button>
-          </div>
-        </div>
+      <div id="hidden-length" hidden="hidden" class="info">
+        <%= favorites.length %>
       </div>
-      <% }); %>
-      <button id="load-more" class="btn-load-more">Load more</button>
+      <% favorites.forEach(function(item) { %>
+        <div id="hidden-userid" hidden="hidden" class="info">
+          <%= item.user_id %>
+        </div>
+        <div class="card">
+          <div class="card-image-container">
+            <img src="<%= item.image_url %>" alt="Item image" class="card-image" />
+          </div>
+          <div class="card-info-container">
+            <div class="card-info title-status">
+              <h5>
+                <%= item.title %> : $<%= item.price %>
+              </h5>
+              <% if(item.status) { %>
+                <span class="status <%= item.status.toLowerCase() %>">
+                  <%= item.status %>
+                </span>
+                <% } else { %>
+                  <span class="status">No Status</span>
+                  <% } %>
+            </div>
+            <div class="card-info description">
+              <p>
+                <%= item.description %>
+              </p>
+            </div>
+            <div class="card-info date-icons">
+              <span>
+                <%= item.created_at.getFullYear() %>-<%= (item.created_at.getMonth() + 1) %>-<%= item.created_at.getDate() %> by <%= item.username %>
+              </span>
+              <div class="icons">
+                <!-- Add icon elements here -->
+              </div>
+              <button class="delete-button" data-id="<%= item.id %>">
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+        <% }); %>
+          <button id="load-more" class="btn-load-more">Load more</button>
     </div>
     <script>
       // This script will submit the form when you change the selection.
@@ -127,18 +131,18 @@
     </script>
     <script>
       document.querySelectorAll('.delete-button').forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
           window.location.reload();
         });
       });
     </script>
     <script>
-      document.getElementById('load-more').addEventListener('click', function() {
+      document.getElementById('load-more').addEventListener('click', function () {
         // after load-more button click, trigger get("/fav/favorites")
         console.log(`hidden-length.innerText = ${document.getElementById('hidden-length').innerText}`);
         const increaseRowLength = 2;  // TODO: change this to actual value, such as 10 or 20...
-        const userId= document.getElementById('hidden-userid').innerText
-        const rowLimit= Number(document.getElementById('hidden-length').innerText) + increaseRowLength
+        const userId = document.getElementById('hidden-userid').innerText
+        const rowLimit = Number(document.getElementById('hidden-length').innerText) + increaseRowLength
         console.log("userId, rowLimit");
         console.log(userId, rowLimit);
         const _url = `/fav/favorites/${userId}/${rowLimit}`
@@ -147,4 +151,5 @@
       });
     </script>
   </body>
+
 </html>

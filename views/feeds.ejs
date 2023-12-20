@@ -4,61 +4,83 @@
   <head>
     <title>Keegeegee - Buy/Sell</title>
 
-    <meta charset="UTF-8" >
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" >
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
     <link rel="stylesheet" href="/vendor/border-box.css" />
     <link rel="stylesheet" href="/styles/main.css" />
     <link rel="stylesheet" href="/styles/layout.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700;800&family=Spectral:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet">
 
     <script src="/vendor/jquery-3.0.0.js"></script>
     <script defer src="/scripts/users.js"></script>
     <script defer src="/scripts/app.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js" integrity="sha512-X/YkDZyjTf4wyc2Vy16YGCPHwAY8rZJY+POgokZjQB2mhIRFJCckEGc6YyX9eNsPfn0PzThEuNs+uaomE5CO6A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"
+      integrity="sha512-X/YkDZyjTf4wyc2Vy16YGCPHwAY8rZJY+POgokZjQB2mhIRFJCckEGc6YyX9eNsPfn0PzThEuNs+uaomE5CO6A==" crossorigin="anonymous"
+      referrerpolicy="no-referrer"></script>
   </head>
 
-<body>
+  <body>
 
-  <%- include('partials/_header') %>
+    <%- include('partials/_header') %>
 
-  <div class="container-fluid">
-    <h1>Feeds</h1>
-    <form id="searchForm" action="/s/search" method="post">
-      <div class="input-group mb-3" id="searchBox">
-        <span class="input-group-text" id="inputGroup-sizing-default">Looking for price: </span>
-        <span class="input-group-text" id="inputGroup-sizing-default">from: $</span>
-        <input id="minPrice" name="minPrice" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-        <span class="input-group-text" id="inputGroup-sizing-default">to: $</span>
-        <input id="maxPrice" name="maxPrice" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-        <button class="btn btn-outline-secondary" type="submit" id="searchBtn">Search</button>
-      </div>
-    </form>
-    <div id="feedsList">
-      <% for (let i = 0; i < feeds.length; i++) { %>
-        <div class="card mb-3" id="cardbox_<%= feeds[i].id %>">
-          <div class="card-body">
-            <img src="<%= feeds[i].image_url %>" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title"><%= feeds[i].title %></h5>
-              <p class="card-text"><%= feeds[i].description %></p>
-              <p class="card-text"><%= feeds[i].username %></p>
-              <p class="card-text"><%= feeds[i].email %></p>
-              <p class="card-text"><%= feeds[i].created_at %></p>
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-success" value="<%= feeds[i].id %>" id="fav_<%= feeds[i].id %>">Mark as my favourite</button>
-                <button type="button" class="btn btn-primary" value="<%= feeds[i].id %>" id="msg_<%= feeds[i].id %>" name="<%= feeds[i].username %>,<%= feeds[i].user_id %>,<%= feeds[i].id%>,<%= feeds[i].pid%>">Leave a message</button>
-                <button type="button" class="btn btn-info" value="<%= feeds[i].id %>" id="email_<%= feeds[i].id %>" value="<%= feeds[i].email %>">Email me</button>
-                <button type="button" class="btn btn-secondary" value="<%= feeds[i].id %>" id="sms_<%= feeds[i].id %>" name="<%= feeds[i].username %>,<%= feeds[i].user_id %>,<%= feeds[i].id%>,<%= feeds[i].pid%>,<%= feeds[i].phone_number %>">Text me</button>
-                <button type="button" class="btn btn-warning" value="<%= feeds[i].id %>" id="sold_<%= feeds[i].id %>">Mark as sold</button>
-                <button type="button" class="btn btn-danger" value="<%= feeds[i].id %>" id="del_<%= feeds[i].id %>">Delete</button>
+      <div class="container-fluid">
+        <h1>Feeds</h1>
+        <form id="searchForm" action="/s/search" method="post">
+          <div class="input-group mb-3" id="searchBox">
+            <span class="input-group-text" id="inputGroup-sizing-default">Looking for price: </span>
+            <span class="input-group-text" id="inputGroup-sizing-default">from: $</span>
+            <input id="minPrice" name="minPrice" type="text" class="form-control" aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default">
+            <span class="input-group-text" id="inputGroup-sizing-default">to: $</span>
+            <input id="maxPrice" name="maxPrice" type="text" class="form-control" aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default">
+            <button class="btn btn-outline-secondary" type="submit" id="searchBtn">Search</button>
+          </div>
+        </form>
+        <div id="feedsList">
+          <% for (let i=0; i < feeds.length; i++) { %>
+            <div class="card mb-3" id="cardbox_<%= feeds[i].id %>">
+              <div class="card-body">
+                <img src="<%= feeds[i].image_url %>" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <%= feeds[i].title %>
+                  </h5>
+                  <p class="card-text">
+                    <%= feeds[i].description %>
+                  </p>
+                  <p class="card-text">
+                    <%= feeds[i].username %>
+                  </p>
+                  <p class="card-text">
+                    <%= feeds[i].email %>
+                  </p>
+                  <p class="card-text">
+                    <%= feeds[i].created_at %>
+                  </p>
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-success" value="<%= feeds[i].id %>" id="fav_<%= feeds[i].id %>">Mark as my favourite</button>
+                    <button type="button" class="btn btn-primary" value="<%= feeds[i].id %>" id="msg_<%= feeds[i].id %>"
+                      name="<%= feeds[i].username %>,<%= feeds[i].user_id %>,<%= feeds[i].id%>,<%= feeds[i].pid%>">Leave a message</button>
+                    <button type="button" class="btn btn-info" value="<%= feeds[i].id %>" id="email_<%= feeds[i].id %>"
+                      value="<%= feeds[i].email %>">Email me</button>
+                    <button type="button" class="btn btn-secondary" value="<%= feeds[i].id %>" id="sms_<%= feeds[i].id %>"
+                      name="<%= feeds[i].username %>,<%= feeds[i].user_id %>,<%= feeds[i].id%>,<%= feeds[i].pid%>,<%= feeds[i].phone_number %>">Text
+                      me</button>
+                    <button type="button" class="btn btn-warning" value="<%= feeds[i].id %>" id="sold_<%= feeds[i].id %>">Mark as sold</button>
+                    <button type="button" class="btn btn-danger" value="<%= feeds[i].id %>" id="del_<%= feeds[i].id %>">Delete</button>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-        <% } %>
+            <% } %>
         </div>
         <div class="modal fade" id="msgModal" tabindex="-1" aria-labelledby="msgModalLabel" aria-hidden="true">
           <div class="modal-dialog">
