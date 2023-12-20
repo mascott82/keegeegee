@@ -36,13 +36,35 @@ const _customSortQryResult = function(_qryResult, _sortPolicy) {
 };
 
 router.get('/favorites', (req, res) => {
+  // without any row limit info, just limit by default row limit at queries/favourites.js
   req.session.loginstatus = {userid:1};  // TODO: replace this hard-coded loginstatus with actual session cookies
   if (req.session.loginstatus) {
     // request user's favorites information against database via query
-    favQry.getFavourites(req.session.loginstatus.userid).then(favs => {
+    favQry.getFavourites(_userid = req.session.loginstatus.userid).then(favs => {
       const _sortedResult = _customSortQryResult(favs, req.query.sortby);
       res.render('favorites', { favorites: _sortedResult });
     });
+  } else {
+    // redirect to login page
+    res.status(400).send({message:"login required"}); // TODO: replace this raw error msg with actual login page redirection
+  }
+});
+
+
+router.get('/favorites/:userid/:rowlimit', (req, res) => {
+  req.session.loginstatus = {userid:1};  // TODO: replace this hard-coded loginstatus with actual session cookies
+  if (req.session.loginstatus) {
+    const userId = req.params.userid;
+
+    // follow request rowLimit
+    const rowLimit = req.params.rowlimit;
+    console.log("post(/favorites) input");
+    console.log(userId, rowLimit);
+    favQry.getFavourites(userId, rowLimit).then(favs => {
+      const _sortedResult = _customSortQryResult(favs, req.query.sortby);
+      res.render('favorites', { favorites: _sortedResult });
+    });
+
   } else {
     // redirect to login page
     res.status(400).send({message:"login required"}); // TODO: replace this raw error msg with actual login page redirection

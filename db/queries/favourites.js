@@ -1,10 +1,13 @@
 const db = require('../connection');
-
-const getFavourites = (_userid) => {
+const ROWLIMIT = 1;  // this is default row limit for the first favorite showing, TODO: please change this properly, such as 10 or 20
+const getFavourites = async function(_userid, _rowLimit = ROWLIMIT) {
+  console.log("_userid, _rowLimit");
+  console.log(_userid, _rowLimit);
   // status is currently set as hard-coded = "active", TODO: add status to items table or status table.
   let _qryString =
   `With fav as (SELECT * from favourites WHERE user_id = ${_userid})
   SELECT
+  a.id,
   a.user_id,
   a.item_listing_id,
   a.created_at,
@@ -22,17 +25,18 @@ const getFavourites = (_userid) => {
   a.user_id = b.user_id
   INNER JOIN users as c
   ON
-  a.user_id = c.id`;
+  a.user_id = c.id
+  ORDER BY a.id desc
+  LIMIT ${_rowLimit}`;
   console.log(_qryString);
-  return db.query(_qryString)
-    .then(data => {
-      console.log("datavalue", data.rows);
-      return data.rows;  // rows will have id, user_id, item_listing_id, created_at
-    })
-    .catch(error => {
-      console.error('Error fetching items: ', error);
-      throw error;
-    });
+  try {
+    const data = await db.query(_qryString);
+    console.log("datavalue", data.rows);
+    return data.rows;
+  } catch (error) {
+    console.error('Error fetching items: ', error);
+    throw error;
+  }
 };
 
 const addFavourite = (favourite) => {
