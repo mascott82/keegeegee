@@ -73,30 +73,6 @@
                           <p class="card-text">
                             <%= results[i].created_at %>
                           </p>
-<<<<<<< HEAD
-
-                          <div class="icons-group">
-                            <div class="btn-group" role="group" aria-label="Basic example">
-
-                              <button type="button" class="btn" value="<%= feeds[i].id %>" id="fav_<%= feeds[i].id %>">
-                                <i class="fa-solid fa-heart"></i>
-                              </button>
-
-                              <button type="button" class="btn" value="<%= feeds[i].id %>" id="msg_<%= feeds[i].id %>"
-                                name="<%= feeds[i].username %>,<%= feeds[i].user_id %>,<%= feeds[i].id%>,<%= feeds[i].pid%>">
-                                <i class="fa-solid fa-inbox card-icon"></i>
-                              </button>
-
-                              <button type="button" class="btn" value="<%= feeds[i].id %>" id="email_<%= feeds[i].id %>"
-                                value="<%= feeds[i].email %>">
-                                <i class="fa-regular fa-envelope card-icon"></i>
-                              </button>
-
-                              <button type="button" class="btn" value="<%= feeds[i].id %>" id="sms_<%= feeds[i].id %>"
-                                name="<%= feeds[i].username %>,<%= feeds[i].user_id %>,<%= feeds[i].id%>,<%= feeds[i].pid%>,<%= feeds[i].phone_number %>">
-                                <i class="fa-regular fa-comment-dots card-icon"></i>
-                              </button>
-=======
                           <div class="btn-group" role="group" aria-label="Basic example">
                             <button type="button" class="btn" value="<%= results[i].id %>" id="fav_<%= results[i].id %>">
                               <i class="fa-solid fa-heart card-icon"></i>
@@ -124,13 +100,6 @@
                               <% if (results[i].isDelBtnActive) {%>
                               <button type="button" class="btn btn-danger" value="<%= results[i].id %>" id="del_<%= results[i].id %>">Delete</button>
                               <% } %>
->>>>>>> ad10ba5 (Featuring - Added button switch and implementd the my feeds page.)
-
-                              <!-- <button type="button" class="btn btn-warning" value="<%= feeds[i].id %>" id="sold_<%= feeds[i].id %>">Mark as
-                                sold</button>
-
-                              <button type="button" class="btn btn-danger" value="<%= feeds[i].id %>" id="del_<%= feeds[i].id %>">Delete</button> -->
-
                             </div>
                           </div>
 
