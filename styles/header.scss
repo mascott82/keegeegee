@@ -36,13 +36,13 @@
 
 .nav-link-left {
   padding: 1rem 0 1rem 0.5rem;
-  color: #EAE3EA;
+  color: #fffbf9;
   text-decoration: none;
 }
 
 .nav-link-left :visited{
   padding: 1rem 0 1rem 0.5rem;
-  color: #EAE3EA;
+  color: #fffbf9;
   text-decoration: none;
 }
 
@@ -70,38 +70,36 @@
 .user-btn {
   border: none;
   background-color: transparent;
-  color: #EAE3EA;
+  color: #fffbf9;
 }
 
 .user-btn:hover {
   border: none;
   background-color: transparent;
-  color: purple;
+  height: 10vh;
 }
 
 .dropdown-links {
   display: none;
   position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
+  top: 10vh;
+  right: 4vh;
+  background-color: #eeeff5;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 4;
+  z-index: 1;
 }
 
 .logout-btn {
   width: 100%;
   border: none;
-  float: none;
-  color: #000000;
   padding: 1rem;
   text-decoration: none;
   display: block;
   text-align: left;
-  position: absolute;
 }
 
 .logout-btn:hover {
-  background-color: #ddd;
+  background-color: #d9dae7;
 }
 
 .dropdown-links a {
@@ -113,7 +111,7 @@
 }
 
 .dropdown-links a:hover {
-  background-color: #ddd;
+  background-color: #d9dae7;
 }
 
 .nav-dropdown:hover .dropdown-links {
