@@ -1,0 +1,91 @@
+.login-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow-y: hidden;
+  height: 90vh;
+  color: #3d405b;
+  background-color: #f8f0eb;
+  background-image: url("/images/45-degree-fabric-light.png");
+}
+
+.login-left-page {
+  height: 100vh;
+  width: 50vw;
+  background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url("/images/laptop-buyer.jpg");
+  background-size: cover;
+  background-position: 25%;
+}
+
+.login-right-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#description-title {
+  margin-bottom: 2rem;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  width: 50vw;
+  color: #3d405b;
+}
+
+.submit-btn {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 30px;
+  background-color: #669880;
+  color: #fffcfa;
+  padding: 0.5rem 5rem;
+  font-weight: bold;
+  box-shadow: 0px 0px 2px #3f5f50;
+}
+
+.login-title {
+  width: 30vw;
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+  font-weight: bold;
+
+}
+
+.login-input {
+  width: 30vw;
+  height: 2rem;
+  background-color: #EDF2F7;
+  box-shadow: 0px 0px 2px #3d405b;
+  border: none;
+  padding-left: 0.5rem;
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+  font-weight: normal;
+}
+
+.register-link {
+  font-weight: bold;
+  color: #3d405b;
+}
+
+a:visited {
+  color: #3d405b;
+  text-decoration: none;
+}
+
+.phone-input {
+  display: flex;
+  flex-direction: column;
+}
+
+#phone-number-input {
+font-size: small;
+text-align: right;
+}
