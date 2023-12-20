@@ -54,8 +54,12 @@ $(function() {
 
       if (btnId.startsWith('email_')) {
         const emailAddr = $(event.currentTarget).val();
-        console.log(emailAddr);
-        window.location.href = `mailto:${emailAddr}?subject=Subject%20of%20the%20email&body=Body%20of%20the%20email`;
+
+        const msgHeader = btnName.split(",");
+        const userName = msgHeader[0];
+
+        const encodedRecipeName = encodeURIComponent(userName);
+        window.location.href = `mailto:${emailAddr}?subject=Subject%20of%20the%20email&body=Recipe%20Name:%20${encodedRecipeName}%0A%0ABody%20of%20the%20email`;
       }
 
       if (btnId.startsWith('sms_')) {
@@ -136,7 +140,7 @@ $(function() {
                   <div id="btn-group" class="btn-group" role="group" aria-label="Basic example">
                   <button type="button" class="btn btn-success" value="${element.id}">Mark as my favourite</button>
                   <button type="button" class="btn btn-primary" value="${element.id}" name="${element.username},${element.user_id},${element.id},${element.pid}" >Leave a message</button>
-                  <button type="button" class="btn btn-primary" value="${element.id}" id="email_${element.id}" value="${element.email}">Email me</button>
+                  <button type="button" class="btn btn-primary" value="${element.id}" id="email_${element.id}" value="${element.email}" name="${element.username},${element.user_id},${element.id},${element.pid}" >Email me</button>
                   <button type="button" class="btn btn-primary" value="${element.id}" id="sms_${element.id}" name="${element.username},${element.user_id},${element.id},${element.pid},${element.phone_number}">Text me</button>
                   <button type="button" class="btn btn-warning" value="${element.id}">Mark as sold</button>
                   <button type="button" class="btn btn-danger" value="${element.id}">Delete</button>
