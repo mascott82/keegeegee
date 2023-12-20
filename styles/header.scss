@@ -49,6 +49,12 @@
 
 .nav-link-right{
   padding: 0.2rem;
+  color: #fffbf9;
+}
+
+.nav-link-right:visited {
+  padding: 0.2rem;
+  color: #fffbf9;
 }
 
 .nav-user {
@@ -117,3 +123,4 @@
 .nav-dropdown:hover .dropdown-links {
   display: block;
 }
+
