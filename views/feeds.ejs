@@ -33,6 +33,7 @@
       <div class="container-fluid">
 
         <div class="search-bar">
+          <h1 id="feed-title">Feeds</h1>
           <form id="searchForm" action="/s/search" method="post">
             <div class="input-group mb-3" id="searchBox">
               <span class="input-group-text" id="inputGroup-sizing-default">Search by Price: </span>
@@ -46,21 +47,15 @@
             </div>
           </form>
         </div>
-        <h1 id="feed-title">Welcome to KeeGeeGee</h1>
 
         <div id="feedsList" class="card-container">
           <% for (let i=0; i < feeds.length; i++) { %>
-            <% if (i % 3===0) { %>
+            <% if (i % 4===0) { %>
               <div class="row">
                 <% } %>
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <div class="card mb-3" id="cardbox_<%= feeds[i].id %>">
                       <div class="card-body">
-                        <div class="favourite-icon">
-                          <button type="button" class="btn" value=" <%=feeds[i].id %>" id="fav_<%= feeds[i].id %>">
-                            <i class="fa-solid fa-heart card-icon"></i>
-                          </button>
-                        </div>
                         <img src="<%= feeds[i].image_url %>" class="card-img-top" alt="...">
                         <div class="card-body">
                           <h5 class="card-title">
@@ -78,38 +73,37 @@
                           <p class="card-text">
                             <%= feeds[i].created_at %>
                           </p>
+                          <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn" value="<%= feeds[i].id %>" id="fav_<%= feeds[i].id %>">
+                              <i class="fa-solid fa-heart card-icon"></i>
+                            </button>
 
-                          <div class="icons-container" role="group" aria-label="Basic example">
-                            <div class="card-icons-group">
-                              <button type="button" class="btn" value=" <%=feeds[i].id %>" id="msg_<%= feeds[i].id %>"
-                                name="<%= feeds[i].username %>,<%= feeds[i].user_id %>,<%= feeds[i].id%>,<%= feeds[i].pid%>">
-                                <i class="fa-solid fa-inbox card-icon"></i>
-                              </button>
+                            <button type="button" class="btn" value="<%= feeds[i].id %>" id="msg_<%= feeds[i].id %>"
+                              name="<%= feeds[i].username %>,<%= feeds[i].user_id %>,<%= feeds[i].id%>,<%= feeds[i].pid%>">
+                              <i class="fa-solid fa-inbox card-icon"></i>
+                            </button>
 
-                              <button type="button" class="btn" value=" <%=feeds[i].id %>" id="email_<%= feeds[i].id %>"
-                                value="<%= feeds[i].email %>">
-                                <i class="fa-regular fa-envelope card-icon"></i>
-                              </button>
+                            <button type="button" class="btn" value="<%= feeds[i].id %>" id="email_<%= feeds[i].id %>"
+                              value="<%= feeds[i].email %>">
+                              <i class="fa-regular fa-envelope card-icon"></i>
+                            </button>
 
-                              <button type="button" class="btn" value=" <%=feeds[i].id %>" id="sms_<%= feeds[i].id %>" name="<%= feeds[i].username %>,<%= feeds[i].user_id %>,<%= feeds[i].id%>,<%= feeds[i].pid%>,
-                                          <%=feeds[i].phone_number%>">
-                                <i class="fa-regular fa-comment-dots card-icon"></i>
-                              </button>
+                            <button type="button" class="btn" value="<%= feeds[i].id %>" id="sms_<%= feeds[i].id %>"
+                              name="<%= feeds[i].username %>,<%= feeds[i].user_id %>,<%= feeds[i].id%>,<%= feeds[i].pid%>,<%= feeds[i].phone_number %>">
+                              <i class="fa-regular fa-comment-dots card-icon"></i>
+                            </button>
 
-                              <!-- <button type="button" value="<%= feeds[i].id %>" id="del_<%= feeds[i].id %>">
-                                <i class="fa-solid fa-trash-can"></i>
-                              </button> -->
-                            </div>
+                            <!-- <button type="button" class="btn btn-warning" value="<%= feeds[i].id %>" id="sold_<%= feeds[i].id %>">Mark as
+                              sold</button>
 
-                            <!-- <button type="button" value="<%= feeds[i].id %>" id="sold_<%= feeds[i].id %>">Mark as
-                              sold</button> -->
+                            <button type="button" class="btn btn-danger" value="<%= feeds[i].id %>" id="del_<%= feeds[i].id %>">Delete</button> -->
+
                           </div>
-
                         </div>
                       </div>
                     </div>
                   </div>
-                  <% if ((i + 1) % 3===0 || (i + 1)===feeds.length) { %>
+                  <% if ((i + 1) % 4===0 || (i + 1)===feeds.length) { %>
               </div>
               <% } %>
                 <% } %>
@@ -144,25 +138,6 @@
           </div>
         </div>
       </div>
-
-<!--       <script>
-        // JavaScript to set equal height for all cards
-        document.addEventListener("DOMContentLoaded", function () {
-          const cards = document.querySelectorAll('.card');
-          const maxHeight = 0;
-
-          cards.forEach(function (card) {
-            const cardHeight = card.offsetHeight;
-            if (cardHeight > maxHeight) {
-              maxHeight = cardHeight;
-            }
-          });
-
-          cards.forEach(function (card) {
-            card.style.height = maxHeight + 'px';
-          });
-        });
-      </script> -->
 
   </body>
 
