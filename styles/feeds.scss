@@ -1,0 +1,40 @@
+#feed-title {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+#searchBox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+.price-search {
+  display: flex;
+  flex-direction: row;
+}
+
+#searchForm {
+  background-color: blue;
+  padding: 1rem;
+  height: 10vh;
+  margin-bottom: 2rem;
+  border-radius: 7px;
+}
+
+#searchBtn {
+  background-color: white;
+  border: 1px solid #dee2e6;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 1;
+  min-height 20px;
+}
