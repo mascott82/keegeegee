@@ -1,7 +1,0 @@
-DB_HOST=pg-3f9b4564-keegeegee.a.aivencloud.com
-DB_USER=avnadmin
-DB_PASS=AVNS_j29jZwG8rmz9aQFisHN
-DB_NAME=defaultdb
-# Uncomment and set to true for Heroku
-DB_SSL=true #if heroku
-DB_PORT=13700
