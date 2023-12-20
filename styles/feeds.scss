@@ -34,7 +34,12 @@
   flex-wrap: wrap;
 }
 
-.card {
-  flex: 1;
-  min-height 20px;
+.btn-group {
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
 }
+
+/* .card {
+  flex: 1;
+} */
