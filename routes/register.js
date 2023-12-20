@@ -7,6 +7,11 @@ router.get('/', (req, res) => {
   users.getUsers()
     .then(data => {
       const templateVars = { username: req.session.username, userId: req.session.userId, data }
+
+      if(req.session.userId) {
+        return res.redirect("/f/feeds")
+      }
+
       res.render('register', templateVars);
     })
 });
