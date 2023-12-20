@@ -1,8 +1,6 @@
 const db = require('../connection');
 const ROWLIMIT = 1;  // this is default row limit for the first favorite showing, TODO: please change this properly, such as 10 or 20
 const getFavourites = async function(_userid, _rowLimit = ROWLIMIT) {
-  console.log("_userid, _rowLimit");
-  console.log(_userid, _rowLimit);
   // status is currently set as hard-coded = "active", TODO: add status to items table or status table.
   let _qryString =
   `With fav as (SELECT * from favourites WHERE user_id = ${_userid})
@@ -28,10 +26,9 @@ const getFavourites = async function(_userid, _rowLimit = ROWLIMIT) {
   a.user_id = c.id
   ORDER BY a.id desc
   LIMIT ${_rowLimit}`;
-  console.log(_qryString);
+
   try {
     const data = await db.query(_qryString);
-    console.log("datavalue", data.rows);
     return data.rows;
   } catch (error) {
     console.error('Error fetching items: ', error);
@@ -44,7 +41,6 @@ const addFavourite = (favourite) => {
       VALUES ($1, $2)`,
   [favourite.userId, favourite.itemId])
     .then(() => {
-      console.log('Favourite item added successfully!');
     })
     .catch(error => {
       console.error('Error adding favourite item: ', error);
@@ -58,11 +54,24 @@ const deleteFavourite = (favId) =>{
   let _deleteQry = `DELETE FROM favourites WHERE id = ${favId};`;  // complete query by using string interpolation
   db.query(_deleteQry)  // db is middle guy and handle with the given query
     .then((data) => {  // db.query is async, need "then" for success case
-      console.log("Deleting favorite succeeded", data);
       return data.rows;
     })
     .catch(err => {  // async, need "catch" for fail case
       console.error('Error in deleting favorite row', err); throw err;
     });
 };
-module.exports = { getFavourites, addFavourite, deleteFavourite };
+
+const getFavouriteByUserIdAndItemId = (userId, itemId) => {
+  const querySql = `
+    SELECT * FROM favourites WHERE user_id = $1 AND item_listing_id = $2
+  `;
+  return db.query(querySql, [userId, itemId])
+    .then((data) => {
+      return data.rows;
+    })
+    .catch(err => {
+      console.error('Error in deleting favorite row', err); throw err;
+    });
+};
+
+module.exports = { getFavourites, addFavourite, deleteFavourite, getFavouriteByUserIdAndItemId };

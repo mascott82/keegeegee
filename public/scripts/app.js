@@ -127,7 +127,7 @@ $(function() {
     $.post('/api/search', $('#searchForm').serialize())
       .done(function(data) {
         data.forEach(element => {
-          const cardBody = `
+          let cardBody = `
             <div class="card mb-3">
               <div class="card-body">
                 <img src="${element.image_url}" class="card-img-top" alt="...">
@@ -142,13 +142,26 @@ $(function() {
                   <button type="button" class="btn btn-primary" value="${element.id}" name="${element.username},${element.user_id},${element.id},${element.pid}" >Leave a message</button>
                   <button type="button" class="btn btn-primary" value="${element.id}" id="email_${element.id}" value="${element.email}" name="${element.username},${element.user_id},${element.id},${element.pid}" >Email me</button>
                   <button type="button" class="btn btn-primary" value="${element.id}" id="sms_${element.id}" name="${element.username},${element.user_id},${element.id},${element.pid},${element.phone_number}">Text me</button>
-                  <button type="button" class="btn btn-warning" value="${element.id}">Mark as sold</button>
-                  <button type="button" class="btn btn-danger" value="${element.id}">Delete</button>
+           `;
+          if (!element.isSoldBtnActive) {
+            //cardBody += `<button type="button" class="btn btn-warning active" value="${element.id}">Mark as sold</button>`;
+          } else {
+            cardBody += `<button type="button" class="btn btn-warning" value="${element.id}">Mark as sold</button>`;
+          }
+          if (!element.isDelBtnActive) {
+            //cardBody += `<button type="button" class="btn btn-danger active" value="${element.id}">Delete</button>`;
+          } else {
+            cardBody += `<button type="button" class="btn btn-danger" value="${element.id}">Delete</button>`;
+          }
+
+          cardBody += `
                   </div>
                 </div>
               </div>
             </div>
           `;
+
+          console.log(cardBody);
 
           $('#feedsList').append(cardBody);
           buttonEventHandler();

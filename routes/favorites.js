@@ -10,27 +10,27 @@ const router = express.Router();
 const favQry = require('../db/queries/favourites');
 
 
-const _customSortQryResult = function (_qryResult, _sortPolicy) {
+const _customSortQryResult = function(_qryResult, _sortPolicy) {
   // _sortPolicy comes from API req.
   let sortedFavorites;
   switch (_sortPolicy) {
-    case 'price_asc':
-      sortedFavorites = _qryResult.sort((a, b) => a.price - b.price);
-      break;
-    case 'price_desc':
-      sortedFavorites = _qryResult.sort((a, b) => b.price - a.price);
-      break;
-    case 'date_asc':
-      sortedFavorites = _qryResult.sort((a, b) => a.date - b.date);
-      break;
-    case 'date_desc':
-      sortedFavorites = _qryResult.sort((a, b) => b.date - a.date);
-      break;
-    case 'availability':
-      sortedFavorites = _qryResult.filter(item => item.status === 'Available');
-      break;
-    default:
-      sortedFavorites = _qryResult;
+  case 'price_asc':
+    sortedFavorites = _qryResult.sort((a, b) => a.price - b.price);
+    break;
+  case 'price_desc':
+    sortedFavorites = _qryResult.sort((a, b) => b.price - a.price);
+    break;
+  case 'date_asc':
+    sortedFavorites = _qryResult.sort((a, b) => a.date - b.date);
+    break;
+  case 'date_desc':
+    sortedFavorites = _qryResult.sort((a, b) => b.date - a.date);
+    break;
+  case 'availability':
+    sortedFavorites = _qryResult.filter(item => item.status === 'Available');
+    break;
+  default:
+    sortedFavorites = _qryResult;
   }
   return sortedFavorites;
 };
@@ -42,7 +42,7 @@ router.get('/favorites', (req, res) => {
     // request user's favorites information against database via query
     favQry.getFavourites(req.session.loginstatus.userid).then(favs => {
       const _sortedResult = _customSortQryResult(favs, req.query.sortby);
-      const templateVars = { username: req.session.username, userId: req.session.userId, favorites: _sortedResult }
+      const templateVars = { username: req.session.username, userId: req.session.userId, favorites: _sortedResult };
       res.render('favorites', templateVars);
     });
   } else {
@@ -59,12 +59,10 @@ router.get('/favorites/:userid/:rowlimit', (req, res) => {
 
     // follow request rowLimit
     const rowLimit = req.params.rowlimit;
-    console.log("post(/favorites) input");
-    console.log(userId, rowLimit);
     favQry.getFavourites(userId, rowLimit).then(favs => {
 
       const _sortedResult = _customSortQryResult(favs, req.query.sortby);
-      const templateVars = { username: req.session.username, userId: req.session.userId, favorites: _sortedResult, rowLimit: req.params.rowLimit }
+      const templateVars = { username: req.session.username, userId: req.session.userId, favorites: _sortedResult, rowLimit: req.params.rowLimit };
 
       res.render('favorites', templateVars);
     });
