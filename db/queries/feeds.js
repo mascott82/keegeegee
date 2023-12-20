@@ -62,22 +62,6 @@ const getFeedsByPrice = (minPrice, maxPrice) => {
     });
 };
 
-const getFeedsByUser = (userId) => {
-  const querySql = `
-    SELECT il.*, u.username AS username, u.email AS email
-    FROM item_listing AS il
-    INNER JOIN users AS u ON u.id = il.user_id
-    WHERE il.user_id = $1
-    ORDER BY created_at DESC
-  `;
-
-  // return db.query('SELECT * FROM item_listing ORDER BY created_at DESC')
-  return db.query(querySql, [userId])
-    .then(data => {
-      return data.rows;
-    });
-};
-
 const addFeed = (feed) => {
   return db.query(`INSERT INTO item_listing (title, description, price, image_url, is_available, user_id)
       VALUES ($1, $2, $3, $4, $5, $6)`,
