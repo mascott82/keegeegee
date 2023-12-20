@@ -15,6 +15,21 @@ const getFeeds = () => {
     });
 };
 
+const getFeedsByUser = (userId) => {
+  const querySql = `
+    SELECT il.*, u.username AS username, u.email AS email
+    FROM item_listing AS il
+    INNER JOIN users AS u ON u.id = il.user_id
+    WHERE u.id = $1
+    ORDER BY il.created_at DESC
+  `;
+
+  return db.query(querySql, [userId])
+    .then(data => {
+      return data.rows;
+    });
+};
+
 const getFeedsByPrice = (minPrice, maxPrice) => {
   let query = 'SELECT * FROM item_listing';
   let params = [];
