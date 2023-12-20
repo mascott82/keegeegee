@@ -19,12 +19,9 @@ router.post("/:id", (req, res) => {
     itemId: feedId,
     userId: userId,
   };
-  console.log("favourite: with itemId, userId");
-  console.log(favourite);
   favs
     .addFavourite(favourite)
     .then(() => {
-      console.log("Marked the feed successfully! ");
       res.send({ message: 1 });
     })
     .catch((error) => {
@@ -33,9 +30,7 @@ router.post("/:id", (req, res) => {
 });
 
 router.delete("/:id", (req, res) => {
-  console.log("ping coming");
   const favId = req.params.id;
-  console.log(favId);
   try {
     favs.deleteFavourite(favId);
   } catch (error) {
