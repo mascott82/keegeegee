@@ -12,21 +12,26 @@ const favs = require("../db/queries/favourites");
 
 router.post("/:id", (req, res) => {
   const feedId = req.body.feedId;
-  // const userId = req.body.userId;  // TODO : make sure req.body has userID
-  const userId = 1;  // TODO: remove this hard-coded userId =1, onnce req.body has userId
+  const userId = req.session.userId;
 
-  const favourite = {
-    itemId: feedId,
-    userId: userId,
-  };
-  favs
-    .addFavourite(favourite)
-    .then(() => {
-      res.send({ message: 1 });
-    })
-    .catch((error) => {
-      console.error("Error marking the feed. ", error);
-    });
+  if (userId === undefined || userId === null) {
+    res.send({ message: 0 });
+  } else {
+    const favourite = {
+      itemId: feedId,
+      userId: userId,
+    };
+
+    favs
+      .addFavourite(favourite)
+      .then(() => {
+        res.send({ message: 1 });
+      })
+      .catch((error) => {
+        console.error("Error marking the feed. ", error);
+      });
+  }
+
 });
 
 router.delete("/:id", (req, res) => {

@@ -11,6 +11,10 @@ $(function() {
       if (btnId.startsWith('fav_')) {
         $.post('/api/fav/:id', { feedId: feedId })
           .done(function(res) {
+            if (res.message === 0) {
+              window.location.href = '/login';
+            }
+
             if (res.message === 1) {
               $('#fav_' + feedId).prop('disabled', true);
             }
@@ -139,10 +143,16 @@ $(function() {
                   <p class="card-text">${element.created_at}</p>
                   <div id="btn-group" class="btn-group" role="group" aria-label="Basic example">
                   <button type="button" class="btn btn-success" value="${element.id}">Mark as my favourite</button>
-                  <button type="button" class="btn btn-primary" value="${element.id}" name="${element.username},${element.user_id},${element.id},${element.pid}" >Leave a message</button>
-                  <button type="button" class="btn btn-primary" value="${element.id}" id="email_${element.id}" value="${element.email}" name="${element.username},${element.user_id},${element.id},${element.pid}" >Email me</button>
-                  <button type="button" class="btn btn-primary" value="${element.id}" id="sms_${element.id}" name="${element.username},${element.user_id},${element.id},${element.pid},${element.phone_number}">Text me</button>
            `;
+
+          if (element.isMsgBtnActive) {
+            cardBody += `
+              <button type="button" class="btn btn-primary" value="${element.id}" name="${element.username},${element.user_id},${element.id},${element.pid}" >Leave a message</button>
+              <button type="button" class="btn btn-primary" value="${element.id}" id="email_${element.id}" value="${element.email}" name="${element.username},${element.user_id},${element.id},${element.pid}" >Email me</button>
+              <button type="button" class="btn btn-primary" value="${element.id}" id="sms_${element.id}" name="${element.username},${element.user_id},${element.id},${element.pid},${element.phone_number}">Text me</button>
+            `;
+          }
+
           if (!element.isSoldBtnActive) {
             //cardBody += `<button type="button" class="btn btn-warning active" value="${element.id}">Mark as sold</button>`;
           } else {
