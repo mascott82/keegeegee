@@ -14,7 +14,9 @@ const getFavourites = async function(_userid, _rowLimit = ROWLIMIT) {
   b.description,
   b.image_url,
   CASE WHEN b.is_available THEN 'available' ELSE 'sold' END as status,
-  c.username
+  c.username,
+  c.email,
+  c.phone_number
   FROM fav as a
   INNER JOIN item_listing as b
   ON
