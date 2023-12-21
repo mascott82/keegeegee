@@ -18,11 +18,12 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   console.log(req.body)
-  const { username, email, password } = req.body;
+  const { username, phone_number, email, password } = req.body;
   const newUser = {
     username,
+    phone_number,
     email,
-    password,
+    password
   };
 
   if (!username || !email || !password) {
@@ -39,6 +40,8 @@ router.post('/', (req, res) => {
 
       addUser(newUser)
 
+      console.log(newUser)
+
       res.redirect("/f/feeds");
 
     })
@@ -47,6 +50,7 @@ router.post('/', (req, res) => {
     });
 
 });
+
 
 
 module.exports = router;
