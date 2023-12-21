@@ -26,30 +26,33 @@
 
     <%- include('partials/_header') %>
 
-    <h1 class="page-title">New Listing</h1>
-    <div class="container-fluid">
-      <form action="/api/feeds/new" method="post" id="newFeedForm" name="newFeedForm" enctype="multipart/form-data">
-        <div class="mb-3">
-          <label for="feedTitle" class="form-label">Title:&nbsp;</label>
-          <input type="text" class="form-control" id="feedTitle" name="feedTitle" aria-describedby="titleHelp">
-          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-        </div>
-        <div class="mb-3">
-          <label for="feedPrice" class="form-label">Price:&nbsp;</label>
-          <input type="text" class="form-control" id="feedPrice" name="feedPrice">
-        </div>
-        <div class="mb-3">
-          <label for="feedImage" class="form-label">Image:&nbsp;</label>
-          <input type="file" class="form-control" id="feedImage" name="feedImage">
-        </div>
-        <div class="mb-3">
-          <label for="feedDesc" class="form-label">Description:&nbsp;</label>
-          <textarea class="form-control" aria-label="With textarea" id="feedDesc" name="feedDesc"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <button type="reset" class="btn btn-warning">Reset</button>
-      </form>
+    <div class="nl-container">
+      <h1 class="nl-title">New Listing</h1>
+      <div class="container-fluid listing-form">
+        <form action="/api/feeds/new" method="post" id="newFeedForm" name="newFeedForm" enctype="multipart/form-data">
+          <div class="mb-3">
+            <label for="feedTitle" class="form-label">Title:&nbsp;</label>
+            <input type="text" class="form-control" id="feedTitle" name="feedTitle" aria-describedby="titleHelp">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          </div>
+          <div class="mb-3">
+            <label for="feedPrice" class="form-label">Price:&nbsp;</label>
+            <input type="text" class="form-control" id="feedPrice" name="feedPrice">
+          </div>
+          <div class="mb-3">
+            <label for="feedImage" class="form-label">Image:&nbsp;</label>
+            <input type="file" class="form-control" id="feedImage" name="feedImage">
+          </div>
+          <div class="mb-3">
+            <label for="feedDesc" class="form-label">Description:&nbsp;</label>
+            <textarea class="form-control" aria-label="With textarea" id="feedDesc" name="feedDesc"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="reset" class="btn btn-warning">Reset</button>
+        </form>
+      </div>
     </div>
+
   </body>
 
 </html>
