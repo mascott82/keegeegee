@@ -9,7 +9,6 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   min-height: 100vh;
   max-width: 100vw;
@@ -26,4 +25,8 @@ a {
 
 a:visited {
   text-decoration: none;
+}
+
+.page-title {
+  padding: 1rem;
 }
