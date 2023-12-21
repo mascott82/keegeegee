@@ -20,6 +20,9 @@
 
     <script src="/vendor/jquery-3.0.0.js"></script>
     <script defer src="/scripts/fav.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"
+    integrity="sha512-X/YkDZyjTf4wyc2Vy16YGCPHwAY8rZJY+POgokZjQB2mhIRFJCckEGc6YyX9eNsPfn0PzThEuNs+uaomE5CO6A==" crossorigin="anonymous"
+    referrerpolicy="no-referrer"></script>
   </head>
 
   <body>
@@ -44,7 +47,8 @@
       <div id="hidden-length" hidden="hidden" class="info">
         <%= favorites.length %>
       </div>
-      <% favorites.forEach(function(item) { %>
+      <div id="favList">
+        <% favorites.forEach(function(item) { %>
         <div id="hidden-userid" hidden="hidden" class="info">
           <%= item.user_id %>
         </div>
@@ -81,16 +85,15 @@
                   <i class="fa-solid fa-inbox card-icon"></i>
                 </button>
 
-                <!-- <button type="button" class="btn" value="<%= item.id %>" id="email_<%= item.id %>"
+                <button type="button" class="btn" value="<%= item.id %>" id="email_<%= item.id %>"
                   value="<%= item.email %>">
                   <i class="fa-regular fa-envelope card-icon"></i>
                 </button>
 
                 <button type="button" class="btn" value="<%= item.id %>" id="sms_<%= item.id %>"
-                  name="<%= item.username %>,<%= item.user_id %>,<%= item.id%>,<%= item.item_listing_id%>,<%= item.phone_number %>">
+                  name="<%= item.username %>,<%= item.user_id %>,<%= item.id%>,<%= item.pid%>,<%= item.phone_number %>">
                   <i class="fa-regular fa-comment-dots card-icon"></i>
-                </button> -->
-
+                </button>
 
                 <button class="delete-button" data-id="<%= item.id %>">
                   Delete
@@ -101,7 +104,36 @@
           </div>
         </div>
         <% }); %>
-          <button id="load-more" class="btn-load-more">Load more</button>
+      </div>
+      <div>
+        <button id="load-more" class="btn-load-more">Load more</button>
+      </div>
+      <div class="modal fade" id="msgModal" tabindex="-1" aria-labelledby="msgModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="msgModalLabel">New message</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="msgModalForm">
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label for="recipient-name" class="col-form-label">Recipient:</label>
+                  <input type="text" class="form-control" id="recipient-name">
+                </div>
+                <div class="mb-3">
+                  <label for="message-text" class="col-form-label">Message:</label>
+                  <textarea class="form-control" id="message-text"></textarea>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="msgModalSubmit">Send message</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script>
@@ -148,43 +180,6 @@
         });
       }
     </script>
-
-    <script>
-      // any id started with msg_
-      document.querySelector('[id^="msg_"]').addEventListener('click', function () {
-        // do POST with parse parameters
-        const msgHeader = btnName.split(",");
-        const userName = msgHeader[0];
-        const toUserId = msgHeader[1];
-        const feedId = msgHeader[2];
-        const pid = msgHeader[3] ? msgHeader[3] : 0;
-
-        $("#recipient-name").val('@' + userName);
-        $('#msgModalLabel').text('New In-App Message');
-        $("#msgModal").modal('show');
-
-        $('#msgModalSubmit').on('click', function(event) {
-          $.post('/api/msg/new', {
-            toUserId: toUserId,
-            itemId: feedId,
-            content: $("#message-text").val(),
-            pid: pid
-          })
-            .done(function(res) {
-              console.log(res.message);
-            });
-
-          $("#msgModal").modal('hide');
-        });
-
-        // Event handler for hiding the modal and clearing content
-        $('#msgModal').on('hide.bs.modal', () => {
-          $("#recipient-name").val('');
-          $("#message-text").val('');
-        });
-      });
-    </script>
-
     <script>
       document.querySelectorAll('.delete-button').forEach(button => {
         button.addEventListener('click', function () {
@@ -205,33 +200,6 @@
 
 
 
-<div class="modal fade" id="msgModal" tabindex="-1" aria-labelledby="msgModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="msgModalLabel">New message</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <form id="msgModalForm">
-        <div class="modal-body">
-          <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Recipient:</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="mb-3">
-            <label for="message-text" class="col-form-label">Message:</label>
-            <textarea class="form-control" id="message-text"></textarea>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="msgModalSubmit">Send message</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-</div>
-  </body>
 
+  </body>
 </html>

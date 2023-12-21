@@ -2,7 +2,7 @@
 
 $(function() {
   const buttonEventHandler = () => {
-    $('#feedsList .btn-group :button').on('click', function(event) {
+    $('#favList .btn-group :button').on('click', function(event) {
       const feedId = $(event.currentTarget).val();
       const btnId = $(event.currentTarget).prop("id");
       const btnName = $(event.currentTarget).prop("name");
@@ -39,46 +39,46 @@ $(function() {
           $("#message-text").val('');
         });
       }
-      // if (btnId.startsWith('email_')) {
-      //   const emailAddr = $(event.currentTarget).val();
+      if (btnId.startsWith('email_')) {
+        const emailAddr = $(event.currentTarget).val();
 
-      //   const msgHeader = btnName.split(",");
-      //   const userName = msgHeader[0];
+        const msgHeader = btnName.split(",");
+        const userName = msgHeader[0];
 
-      //   const encodedRecipeName = encodeURIComponent(userName);
-      //   window.location.href = `mailto:${emailAddr}?subject=Subject%20of%20the%20email&body=Recipe%20Name:%20${encodedRecipeName}%0A%0ABody%20of%20the%20email`;
-      // }
+        const encodedRecipeName = encodeURIComponent(userName);
+        window.location.href = `mailto:${emailAddr}?subject=Subject%20of%20the%20email&body=Recipe%20Name:%20${encodedRecipeName}%0A%0ABody%20of%20the%20email`;
+      }
 
-      // if (btnId.startsWith('sms_')) {
-      //   const msgHeader = btnName.split(",");
-      //   const userName = msgHeader[0];
-      //   const toUserId = msgHeader[1];
-      //   const feedId = msgHeader[2];
-      //   const pid = msgHeader[3] ? msgHeader[3] : 0;
-      //   const phoneNumber = msgHeader[4];
+      if (btnId.startsWith('sms_')) {
+        const msgHeader = btnName.split(",");
+        const userName = msgHeader[0];
+        const toUserId = msgHeader[1];
+        const feedId = msgHeader[2];
+        const pid = msgHeader[3] ? msgHeader[3] : 0;
+        const phoneNumber = msgHeader[4];
 
-      //   $("#recipient-name").val('@' + userName);
-      //   $('#msgModalLabel').text('New Text Message');
-      //   $("#msgModal").modal('show');
+        $("#recipient-name").val('@' + userName);
+        $('#msgModalLabel').text('New Text Message');
+        $("#msgModal").modal('show');
 
-      //   $('#msgModalSubmit').on('click', function(event) {
-      //     $.post('/api/msg/sms', {
-      //       toUserPhoneNumber:  phoneNumber,
-      //       content: $("#message-text").val()
-      //     })
-      //       .done(function(res) {
-      //         console.log(res.message);
-      //       });
+        $('#msgModalSubmit').on('click', function(event) {
+          $.post('/api/msg/sms', {
+            toUserPhoneNumber:  phoneNumber,
+            content: $("#message-text").val()
+          })
+            .done(function(res) {
+              console.log(res.message);
+            });
 
-      //     $("#msgModal").modal('hide');
-      //   });
+          $("#msgModal").modal('hide');
+        });
 
-      //   // Event handler for hiding the modal and clearing content
-      //   $('#msgModal').on('hide.bs.modal', () => {
-      //     $("#recipient-name").val('');
-      //     $("#message-text").val('');
-      //   });
-      // }
+        // Event handler for hiding the modal and clearing content
+        $('#msgModal').on('hide.bs.modal', () => {
+          $("#recipient-name").val('');
+          $("#message-text").val('');
+        });
+      }
     });
   };
 
