@@ -9,7 +9,6 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   min-height: 100vh;
   max-width: 100vw;
@@ -17,6 +16,7 @@ body {
   background-color: #f8f0eb;
   background-image: url("/images/45-degree-fabric-light.png");
   font-family: 'Karla', sans-serif;
+ --bs-body-color: #3d405b;
 }
 
 
@@ -26,4 +26,8 @@ a {
 
 a:visited {
   text-decoration: none;
+}
+
+.page-title {
+  padding: 1rem;
 }

@@ -28,7 +28,7 @@
 
     <div class="container">
       <div class="header">
-        <h1>My Favorites</h1>
+        <h1 class="page-title">My Favorites</h1>
         <form id="sortForm">
           <select name="sortby" onchange="document.getElementById('sortForm').submit();">
             <option value="default">Sort By</option>
@@ -40,6 +40,7 @@
           </select>
         </form>
       </div>
+      
       <div id="hidden-length" hidden="hidden" class="info">
         <%= favorites.length %>
       </div>
