@@ -21,8 +21,6 @@ const getFavourites = async function(_userid, _rowLimit = ROWLIMIT) {
   INNER JOIN item_listing as b
   ON
   a.item_listing_id = b.id
-  AND
-  a.user_id = b.user_id
   INNER JOIN users as c
   ON
   a.user_id = c.id
