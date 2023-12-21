@@ -16,7 +16,8 @@ $(function() {
             }
 
             if (res.message === 1) {
-              $('#fav_' + feedId).prop('disabled', true);
+              $(`#fav_${feedId} i`).removeClass("far fa-heart card-icon").addClass("fa-solid fa-heart card-icon");
+              $('#fav_' + feedId).prop("disabled", true);
             }
           })
           .fail(function(jqXHR, textStatus, errorThrown) {

@@ -65,6 +65,9 @@
                             <%= results[i].description %>
                           </p>
                           <p class="card-text">
+                            <%= results[i].price %>
+                          </p>
+                          <p class="card-text">
                             <%= results[i].username %>
                           </p>
                           <p class="card-text">
@@ -75,7 +78,11 @@
                           </p>
                           <div class="btn-group" role="group" aria-label="Basic example">
                             <button type="button" class="btn" value="<%= results[i].id %>" id="fav_<%= results[i].id %>">
+                              <% if (results[i].isFavBtnActive) {%>
                               <i class="fa-solid fa-heart card-icon"></i>
+                              <% } else { %>
+                              <i class="far fa-heart card-icon"></i>
+                              <% } %>
                             </button>
                             <% if (results[i].isMsgBtnActive) { %>
                             <button type="button" class="btn" value="<%= results[i].id %>" id="msg_<%= results[i].id %>"

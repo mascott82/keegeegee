@@ -16,9 +16,6 @@ router.get('/feeds', (req, res) => {
   const results = [];
   feed.getFeeds()
     .then(feeds => {
-      // const templateVars = { username: req.session.username, userId: req.session.userId, feeds };
-      // res.render('feeds', templateVars);
-
       feeds.forEach(element => {
         if (userId === element.user_id) {
           element['isSoldBtnActive'] = true;
@@ -35,7 +32,7 @@ router.get('/feeds', (req, res) => {
       });
 
       const templateVars = { username: req.session.username, userId: req.session.userId, results };
-      res.render('myfeeds', templateVars);
+      res.render('feeds', templateVars);
     });
 });
 
