@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
     <link rel="stylesheet" href="/vendor/border-box.css" />
     <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="stylesheet" href="/styles/messages.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700;800&family=Spectral:wght@300;400;500;600;700;800&display=swap"
@@ -27,9 +28,9 @@
 
   <body>
     <%- include('partials/_header') %>
-      <div class="card">
+      <div class="card" id="card-container">
         <div class="card-header">
-          My messages
+          <h1 class="page-title">My Messages</h1>
         </div>
         <div class="card-body" id="msgCardBody">
           <% for (let i=0; i < result.length; i++) { %>
@@ -53,8 +54,7 @@
                         <%= result[i].created_at %>>
                       </small></p>
                     <button type="button" class="btn btn-primary" id="msgReBtn_<%= result[i].id %>" name="msgReBtn"
-                      value="<%= result[i].from_user_id %>,<%= result[i].id %>,<%= result[i].item_listing_id %>,<%= result[i].fromusername %>">Reply
-                      this message</button>
+                      value="<%= result[i].from_user_id %>,<%= result[i].id %>,<%= result[i].item_listing_id %>,<%= result[i].fromusername %>">Reply to Message</button>
                   </div>
                 </div>
               </div>
@@ -66,7 +66,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="msgModalLabel">Reply this message</h1>
+              <h1 class="modal-title fs-5" id="msgModalLabel">Reply to Message</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form id="msgModalForm">
