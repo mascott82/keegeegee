@@ -44,7 +44,6 @@ select {
 }
 .card-image-container {
   width: 30%;
-  background-color: #696460;
   padding: 15px;
   display: flex;
   align-items: center;
@@ -54,6 +53,7 @@ select {
   display: block;
   max-width: 100%;
   max-height: 100%;
+  border-radius: 5px;
 }
 .card-info-container {
   flex-grow: 1;
@@ -87,9 +87,9 @@ select {
   color: gray;
 }
 
-.icons {
+/* .icons {
 
-}
+} */
 
 .status {
   font-size: 0.8em;
@@ -120,4 +120,10 @@ select {
   border: 2px solid #ccc;
   cursor: pointer;
   border-radius: 20px;
+}
+
+.delete-button {
+  color: #d9534f;
+  border: none;
+  background-color: transparent;
 }

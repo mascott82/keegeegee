@@ -46,6 +46,7 @@
         <div id="hidden-userid" hidden="hidden" class="info">
           <%= item.user_id %>
         </div>
+
         <div class="card">
           <div class="card-image-container">
             <img src="<%= item.image_url %>" alt="Item image" class="card-image" />
@@ -77,6 +78,7 @@
               </div>
               <button class="delete-button" data-id="<%= item.id %>">
                 Delete
+                <i class="fa-solid fa-trash-can"></i>
               </button>
             </div>
           </div>
@@ -84,6 +86,7 @@
         <% }); %>
           <button id="load-more" class="btn-load-more">Load more</button>
     </div>
+    
     <script>
       // This script will submit the form when you change the selection.
       // Actual sorting logic will be handled server-side.
