@@ -8,7 +8,7 @@
 const express = require('express');
 const router = express.Router();
 const favQry = require('../db/queries/favourites');
-
+const ITEM_IS_AVAILABLE = "available";  // this is case-sensitive!
 
 const _customSortQryResult = function(_qryResult, _sortPolicy) {
   // _sortPolicy comes from API req.
@@ -27,7 +27,7 @@ const _customSortQryResult = function(_qryResult, _sortPolicy) {
     sortedFavorites = _qryResult.sort((a, b) => b.date - a.date);
     break;
   case 'availability':
-    sortedFavorites = _qryResult.filter(item => item.status === 'Available');
+    sortedFavorites = _qryResult.filter(item => item.status === ITEM_IS_AVAILABLE);
     break;
   default:
     sortedFavorites = _qryResult;
@@ -36,12 +36,14 @@ const _customSortQryResult = function(_qryResult, _sortPolicy) {
 };
 
 router.get('/favorites', (req, res) => {
-  // without any row limit info, just limit by default row limit at queries/favourites.js
-  req.session.loginstatus = { userid: 1 };  // TODO: replace this hard-coded loginstatus with actual session cookies
-  if (req.session.loginstatus) {
+  // userid =1, john.doe@email.com, $2a$12$XpHkSnm4Tf/jZS38tYNpVu1P9B27TPs5f.yhvXCBdHkk3mCZCRVTu
+  // userid =2, jane.smith@email.com, $2a$12$XpHkSnm4Tf/jZS38tYNpVu1P9B27TPs5f.yhvXCBdHkk3mCZCRVTu
+  if (req.session.username || req.session.userId) {
     // request user's favorites information against database via query
-    favQry.getFavourites(req.session.loginstatus.userid).then(favs => {
+    favQry.getFavourites(req.session.userId).then(favs => {
       const _sortedResult = _customSortQryResult(favs, req.query.sortby);
+      // username, userId in templateVars -> goes to views/partials/_header.ejs
+      // favorites in templateVars -> goes to views/favorties.ejs
       const templateVars = { username: req.session.username, userId: req.session.userId, favorites: _sortedResult };
       res.render('favorites', templateVars);
     });
@@ -53,10 +55,8 @@ router.get('/favorites', (req, res) => {
 
 
 router.get('/favorites/:userid/:rowlimit', (req, res) => {
-  req.session.loginstatus = { userid: 1 };  // TODO: replace this hard-coded loginstatus with actual session cookies
-  if (req.session.loginstatus) {
+  if (req.session.username || req.session.userId) {
     const userId = req.params.userid;
-
     // follow request rowLimit
     const rowLimit = req.params.rowlimit;
     favQry.getFavourites(userId, rowLimit).then(favs => {

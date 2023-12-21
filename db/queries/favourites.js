@@ -1,5 +1,5 @@
 const db = require('../connection');
-const ROWLIMIT = 1;  // this is default row limit for the first favorite showing, TODO: please change this properly, such as 10 or 20
+const ROWLIMIT = 10;
 const getFavourites = async function(_userid, _rowLimit = ROWLIMIT) {
   // status is currently set as hard-coded = "active", TODO: add status to items table or status table.
   let _qryString =

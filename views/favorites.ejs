@@ -142,7 +142,7 @@
       document.getElementById('load-more').addEventListener('click', function () {
         // after load-more button click, trigger get("/fav/favorites")
         console.log(`hidden-length.innerText = ${document.getElementById('hidden-length').innerText}`);
-        const increaseRowLength = 2;  // TODO: change this to actual value, such as 10 or 20...
+        const increaseRowLength = 10;
         const userId = document.getElementById('hidden-userid').innerText
         const rowLimit = Number(document.getElementById('hidden-length').innerText) + increaseRowLength
         console.log("userId, rowLimit");
