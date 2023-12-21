@@ -32,16 +32,16 @@
         <form action="/api/feeds/new" method="post" id="newFeedForm" name="newFeedForm" enctype="multipart/form-data">
           <div class="mb-3">
             <label for="feedTitle" class="form-label">Title:&nbsp;</label>
-            <input type="text" class="form-control" id="feedTitle" name="feedTitle" aria-describedby="titleHelp">
+            <input type="text" class="form-control" id="feedTitle" name="feedTitle" aria-describedby="titleHelp" required>
             <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
           </div>
           <div class="mb-3">
             <label for="feedPrice" class="form-label">Price:&nbsp;</label>
-            <input type="text" class="form-control" id="feedPrice" name="feedPrice">
+            <input type="text" class="form-control" id="feedPrice" name="feedPrice" required>
           </div>
           <div class="mb-3">
             <label for="feedImage" class="form-label">Image:&nbsp;</label>
-            <input type="file" class="form-control" id="feedImage" name="feedImage">
+            <input type="file" class="form-control" id="feedImage" name="feedImage" required>
           </div>
           <div class="mb-3">
             <label for="feedDesc" class="form-label">Description:&nbsp;</label>
