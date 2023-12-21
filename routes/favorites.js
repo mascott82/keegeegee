@@ -69,7 +69,7 @@ router.get('/favorites/:userid/:rowlimit', (req, res) => {
 
   } else {
     // redirect to login page
-    res.status(400).send({ message: "login required" }); // TODO: replace this raw error msg with actual login page redirection
+    res.redirect("/login/");
   }
 });
 
