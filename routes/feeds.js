@@ -18,8 +18,13 @@ router.get('/feeds', (req, res) => {
     .then(feeds => {
       feeds.forEach(element => {
         if (userId === element.user_id) {
+          element['isMsgBtnActive'] = false;
           element['isSoldBtnActive'] = true;
           element['isDelBtnActive'] = true;
+        } else {
+          element['isMsgBtnActive'] = true;
+          element['isSoldBtnActive'] = false;
+          element['isDelBtnActive'] = false;
         }
 
         getFavouriteByUserIdAndItemId(userId, element.id)
