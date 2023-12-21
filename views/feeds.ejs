@@ -80,7 +80,7 @@
                     <p class="card-text">
                       <%= results[i].created_at %>
                     </p>
-                    <div class="btn-group" role="group" aria-label="Basic example">
+                    <div class="btn-group" id="icon-btn-group" role="group" aria-label="Basic example">
                       <button type="button" class="btn" value="<%= results[i].id %>" id="fav_<%= results[i].id %>">
                         <% if (!results[i].isSoldBtnActive) {%>
                           <% if (results[i].isFavBtnActive) {%>
@@ -112,7 +112,7 @@
                             <% } %>
                               <% if (results[i].isDelBtnActive) {%>
                                 <button type="button" class="btn" id="delete-btn" value="<%= results[i].id %>" id="del_<%= results[i].id %>">
-                                  <i class="fa-regular fa-trash-can"></i>
+                                  Delete
                                 </button>
                                 <% } %>
                     </div>

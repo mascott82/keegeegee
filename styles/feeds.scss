@@ -72,11 +72,19 @@
 
 
 #sold-btn {
-  background-color: #669880;
-  color: #fffbf9;
+  border: 1px solid #669880;
+  color: #669880;
   border-radius: 30px;
 }
 
 #delete-btn {
-  color: #8f8f8f;
+  border: 1px solid #e07a5f;
+  color: #e07a5f;
+  border-radius: 30px;
+}
+
+#icon-btn-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
