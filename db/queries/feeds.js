@@ -2,7 +2,7 @@ const db = require('../connection');
 
 const getFeeds = () => {
   const querySql = `
-    SELECT il.*, u.username AS username, u.email AS email
+    SELECT il.*, u.username AS username, u.email AS email, u.phone_number AS phone_number
     FROM item_listing AS il
     INNER JOIN users AS u ON u.id = il.user_id
     ORDER BY created_at DESC
@@ -17,7 +17,7 @@ const getFeeds = () => {
 
 const getFeedsByUser = (userId) => {
   const querySql = `
-    SELECT il.*, u.username AS username, u.email AS email
+    SELECT il.*, u.username AS username, u.email AS email, u.phone_number AS phone_number
     FROM item_listing AS il
     INNER JOIN users AS u ON u.id = il.user_id
     WHERE u.id = $1
@@ -32,7 +32,7 @@ const getFeedsByUser = (userId) => {
 
 const getFeedsByPrice = (minPrice, maxPrice) => {
   let query = `
-    SELECT il.*, u.username AS username, u.email AS email
+    SELECT il.*, u.username AS username, u.email AS email, u.phone_number AS phone_number
     FROM item_listing AS il
     INNER JOIN users AS u ON u.id = il.user_id
   `;

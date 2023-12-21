@@ -40,7 +40,7 @@
           </select>
         </form>
       </div>
-      
+
       <div id="hidden-length" hidden="hidden" class="info">
         <%= favorites.length %>
       </div>
@@ -48,7 +48,6 @@
         <div id="hidden-userid" hidden="hidden" class="info">
           <%= item.user_id %>
         </div>
-
         <div class="card">
           <div class="card-image-container">
             <img src="<%= item.image_url %>" alt="Item image" class="card-image" />
@@ -82,7 +81,7 @@
                   <i class="fa-solid fa-inbox card-icon"></i>
                 </button>
 
-                <button type="button" class="btn" value="<%= item.id %>" id="email_<%= item.id %>"
+                <!-- <button type="button" class="btn" value="<%= item.id %>" id="email_<%= item.id %>"
                   value="<%= item.email %>">
                   <i class="fa-regular fa-envelope card-icon"></i>
                 </button>
@@ -90,13 +89,14 @@
                 <button type="button" class="btn" value="<%= item.id %>" id="sms_<%= item.id %>"
                   name="<%= item.username %>,<%= item.user_id %>,<%= item.id%>,<%= item.item_listing_id%>,<%= item.phone_number %>">
                   <i class="fa-regular fa-comment-dots card-icon"></i>
-                </button>
+                </button> -->
 
 
                 <button class="delete-button" data-id="<%= item.id %>">
                   Delete
                   <i class="fa-solid fa-trash-can"></i>
                 </button>
+              </div>
             </div>
           </div>
         </div>
