@@ -33,7 +33,7 @@
       <div class="container-fluid">
 
         <div class="search-bar">
-        <h1 id="feed-title" class="page-title">Welcome to KeeGeeGee </h1>
+          <h1 id="feed-title" class="page-title">Welcome to KeeGeeGee </h1>
           <form id="searchForm" action="/s/search" method="post">
             <div class="input-group mb-3" id="searchBox">
               <span class="input-group-text" id="inputGroup-sizing-default">Search by Price: </span>
@@ -48,108 +48,113 @@
           </form>
         </div>
 
-        <div id="feedsList" class="card-container">
+
+
+        <div class="row" id="feedsList">
           <% for (let i=0; i < results.length; i++) { %>
             <% if (i % 4===0) { %>
-              <div class="row">
-                <% } %>
-                  <div class="col-md-3">
-                    <div class="card mb-3" id="cardbox_<%= results[i].id %>">
-                      <div class="card-body">
-                        <img src="<%= results[i].image_url %>" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">
-                            <%= results[i].title %>
-                          </h5>
-                          <p class="card-text">
-                            <%= results[i].description %>
-                          </p>
-                          <p class="card-text">
-                            <%= results[i].price %>
-                          </p>
-                          <p class="card-text">
-                            <%= results[i].username %>
-                          </p>
-                          <p class="card-text">
-                            <%= results[i].email %>
-                          </p>
-                          <p class="card-text">
-                            <%= results[i].created_at %>
-                          </p>
-                          <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn" value="<%= results[i].id %>" id="fav_<%= results[i].id %>">
-                              <% if (!results[i].isSoldBtnActive) {%>
-                                <% if (results[i].isFavBtnActive) {%>
-                                <i class="fa-solid fa-heart card-icon"></i>
-                                <% } else { %>
-                                <i class="far fa-heart card-icon"></i>
+        </div>
+        <div class="row">
+          <% } %>
+
+            <div class="col-md-3">
+              <div class="card mb-3" id="cardbox_<%= results[i].id %>">
+                <div class="card-body">
+                  <img src="<%= results[i].image_url %>" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <%= results[i].title %>
+                    </h5>
+                    <p class="card-text">
+                      <%= results[i].description %>
+                    </p>
+                    <p class="card-text">
+                      <%= results[i].price %>
+                    </p>
+                    <p class="card-text">
+                      <%= results[i].username %>
+                    </p>
+                    <p class="card-text">
+                      <%= results[i].email %>
+                    </p>
+                    <p class="card-text">
+                      <%= results[i].created_at %>
+                    </p>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                      <button type="button" class="btn" value="<%= results[i].id %>" id="fav_<%= results[i].id %>">
+                        <% if (!results[i].isSoldBtnActive) {%>
+                          <% if (results[i].isFavBtnActive) {%>
+                            <i class="fa-solid fa-heart card-icon"></i>
+                            <% } else { %>
+                              <i class="far fa-heart card-icon"></i>
+                              <% } %>
                                 <% } %>
-                              <% } %>
-                            </button>
-                            <% if (results[i].isMsgBtnActive) { %>
-                            <button type="button" class="btn" value="<%= results[i].id %>" id="msg_<%= results[i].id %>"
-                              name="<%= results[i].username %>,<%= results[i].user_id %>,<%= results[i].id%>,<%= results[i].pid%>">
-                              <i class="fa-solid fa-inbox card-icon"></i>
-                            </button>
+                      </button>
+                      <% if (results[i].isMsgBtnActive) { %>
+                        <button type="button" class="btn" value="<%= results[i].id %>" id="msg_<%= results[i].id %>"
+                          name="<%= results[i].username %>,<%= results[i].user_id %>,<%= results[i].id%>,<%= results[i].pid%>">
+                          <i class="fa-solid fa-inbox card-icon"></i>
+                        </button>
 
-                            <button type="button" class="btn" value="<%= results[i].id %>" id="email_<%= results[i].id %>"
-                              value="<%= results[i].email %>">
-                              <i class="fa-regular fa-envelope card-icon"></i>
-                            </button>
+                        <button type="button" class="btn" value="<%= results[i].id %>" id="email_<%= results[i].id %>"
+                          value="<%= results[i].email %>">
+                          <i class="fa-regular fa-envelope card-icon"></i>
+                        </button>
 
-                            <button type="button" class="btn" value="<%= results[i].id %>" id="sms_<%= results[i].id %>"
-                              name="<%= results[i].username %>,<%= results[i].user_id %>,<%= results[i].id%>,<%= results[i].pid%>,<%= results[i].phone_number %>">
-                              <i class="fa-regular fa-comment-dots card-icon"></i>
-                            </button>
+                        <button type="button" class="btn" value="<%= results[i].id %>" id="sms_<%= results[i].id %>"
+                          name="<%= results[i].username %>,<%= results[i].user_id %>,<%= results[i].id%>,<%= results[i].pid%>,<%= results[i].phone_number %>">
+                          <i class="fa-regular fa-comment-dots card-icon"></i>
+                        </button>
+                        <% } %>
+                          <% if (results[i].isSoldBtnActive) {%>
+                            <button type="button" class="btn" id="sold-btn" value="<%= results[i].id %>" id="sold_<%= results[i].id %>">Mark as
+                              sold</button>
                             <% } %>
-                            <% if (results[i].isSoldBtnActive) {%>
-                              <button type="button" class="btn btn-warning" value="<%= results[i].id %>" id="sold_<%= results[i].id %>">Mark as
-                                sold</button>
-                              <% } %>
                               <% if (results[i].isDelBtnActive) {%>
-                              <button type="button" class="btn btn-danger" value="<%= results[i].id %>" id="del_<%= results[i].id %>">Delete</button>
-                              <% } %>
-                            </div>
-                          </div>
-
-                        </div>
-                      </div>
+                                <button type="button" class="btn" id="delete-btn" value="<%= results[i].id %>" id="del_<%= results[i].id %>">
+                                  <i class="fa-regular fa-trash-can"></i>
+                                </button>
+                                <% } %>
                     </div>
                   </div>
-                  <% if ((i + 1) % 4===0 || (i + 1)===results.length) { %>
-              </div>
-              <% } %>
-                <% } %>
-        </div>
-
-
-
-        <div class="modal fade" id="msgModal" tabindex="-1" aria-labelledby="msgModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="msgModalLabel">New message</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <form id="msgModalForm">
-                <div class="modal-body">
-                  <div class="mb-3">
-                    <label for="recipient-name" class="col-form-label">Recipient:</label>
-                    <input type="text" class="form-control" id="recipient-name">
-                  </div>
-                  <div class="mb-3">
-                    <label for="message-text" class="col-form-label">Message:</label>
-                    <textarea class="form-control" id="message-text"></textarea>
-                  </div>
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary" id="msgModalSubmit">Send message</button>
-                </div>
-              </form>
+              </div>
             </div>
+
+            <% if ((i + 1) % 4===0 || (i + 1)===results.length) { %>
+        </div>
+        <% } %>
+          <% } %>
+      </div>
+
+
+
+      <div class="modal fade" id="msgModal" tabindex="-1" aria-labelledby="msgModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="msgModalLabel">New message</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="msgModalForm">
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label for="recipient-name" class="col-form-label">Recipient:</label>
+                  <input type="text" class="form-control" id="recipient-name">
+                </div>
+                <div class="mb-3">
+                  <label for="message-text" class="col-form-label">Message:</label>
+                  <textarea class="form-control" id="message-text"></textarea>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="msgModalSubmit">Send message</button>
+              </div>
+            </form>
           </div>
         </div>
+      </div>
       </div>
 
   </body>
