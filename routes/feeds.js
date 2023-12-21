@@ -43,7 +43,11 @@ router.get('/feeds', (req, res) => {
 
 router.get('/new', (req, res) => {
   const templateVars = { username: req.session.username, userId: req.session.userId};
-  res.render('newFeed', templateVars);
+  if(!req.session.userId) {
+    res.render('login', templateVars);
+  } else {
+    res.render('newFeed', templateVars);
+  }
 });
 
 router.get('/myfeeds', (req, res) => {
