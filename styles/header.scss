@@ -102,6 +102,7 @@
   text-decoration: none;
   display: block;
   text-align: left;
+  color: #3d405b;
 }
 
 .logout-btn:hover {
@@ -110,7 +111,7 @@
 
 .dropdown-links a {
   float: none;
-  color: black;
+  color: #3d405b;
   padding: 1rem;
   text-decoration: none;
   display: block;
@@ -118,10 +119,13 @@
 
 .dropdown-links a:hover {
   background-color: #d9dae7;
+  width: 100%;
 }
 
 .nav-dropdown:hover .dropdown-links {
   display: block;
+  width: 10vw;
+  background-color: #eeeff5;
 }
 
 .fa-house {
