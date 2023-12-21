@@ -2,7 +2,7 @@
 
 $(function() {
   const buttonEventHandler = () => {
-    $('#feedsList .btn-group :button').on('click', function(event) {
+    $('.btn-group :button').on('click', function(event) {
       const feedId = $(event.currentTarget).val();
       const btnId = $(event.currentTarget).prop("id");
       const btnName = $(event.currentTarget).prop("name");
