@@ -56,7 +56,6 @@ const favoritesApiRoutes = require('./routes/favorites-api');
 const messageApiRoutes = require('./routes/message-api');
 const messageRoutes = require('./routes/message');
 const logoutRoutes = require('./routes/logout');
-const myListingsRoutes = require('./routes/myListings');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -75,7 +74,6 @@ app.use('/api/fav', favoritesApiRoutes);
 app.use('/api/msg', messageApiRoutes);
 app.use('/m', messageRoutes);
 app.use('/logout', logoutRoutes);
-app.use('/myListings', myListingsRoutes);
 
 // Note: mount other resources here, using the same pattern above
 
