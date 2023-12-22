@@ -1,6 +1,7 @@
 body {
   font-family: sans-serif;
 }
+
 .container {
   width: 100%;
   margin: auto;
@@ -10,7 +11,7 @@ body {
 
 .header {
   width: 100%;
-  margin: 0auto;
+  margin: 0 auto;
   max-width: 1200px;
   display: flex;
   text-align: center;
@@ -26,13 +27,16 @@ body {
 }
 
 select {
-  margin-left: auto; /* This will push 'sort by' drop-box to the right */
+  margin-left: auto;
+  /* This will push 'sort by' drop-box to the right */
   color: gray;
   padding: 3px;
   border: 1px solid #ccc;
 }
+
 .card {
   width: 100%;
+  height: 50% !important;
   display: flex;
   flex-direction: row;
   border: 1px solid #ccc;
@@ -42,6 +46,7 @@ select {
   background-color: white;
   overflow: hidden;
 }
+
 .card-image-container {
   width: 30%;
   padding: 15px;
@@ -49,12 +54,14 @@ select {
   align-items: center;
   justify-content: center;
 }
+
 .card-image {
   display: block;
   max-width: 100%;
   max-height: 100%;
   border-radius: 5px;
 }
+
 .card-info-container {
   flex-grow: 1;
   background-color: white;
@@ -66,6 +73,7 @@ select {
   padding: 10px;
   background-color: white;
   margin: 5px;
+
 }
 
 .title-status {
@@ -83,28 +91,23 @@ select {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  cursor: pointer;
   color: gray;
 }
 
-/* .icons {
-
-} */
-
 .status {
-  font-size: 0.8em;
-  padding: 2px 8px;
+  font-size: 1rem;
+  padding: 0.25rem 1rem;
   border-radius: 5px;
   color: white;
-  text-transform: capitalize; /* Capitalize the status text */
+  text-transform: capitalize;
 }
 
 .status.sold {
-  background-color: #d9534f; /* Red color for 'sold' status */
+  background-color: #d9534f;
 }
 
 .status.available {
-  background-color: #5cb85c; /* Green color for 'available' status */
+  background-color: #5cb85c;
 }
 
 .btn-load-more {
@@ -123,7 +126,40 @@ select {
 }
 
 .delete-button {
+  font-size: large;
   color: #d9534f;
   border: none;
   background-color: transparent;
+}
+
+.card-icon {
+  color: #669880;
+}
+
+.card-icon:hover {
+  opacity: 80%;
+  color: #e07a5f;
+}
+
+.favourite-icon {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+
+.fa-heart {
+  color: #e07a5f;
+}
+
+.fa-heart:hover {
+  opacity: 80%;
+}
+
+#delete-btn {
+  // border: 1px solid #e07a5f;
+  background-color: #e07a5f;
+  color: #fffbf9;
+  padding: 0 1rem;
+  border-radius: 30px;
+  margin: 1rem;
 }

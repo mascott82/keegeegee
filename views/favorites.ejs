@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="/vendor/border-box.css" />
     <link rel="stylesheet" href="/styles/main.css" />
     <link rel="stylesheet" href="/styles/favorites.css" />
-    <link rel="stylesheet" href="/styles/feeds.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700;800&family=Spectral:wght@300;400;500;600;700;800&display=swap"
@@ -95,9 +94,8 @@
                   <i class="fa-regular fa-comment-dots card-icon"></i>
                 </button>
 
-                <button class="delete-button" data-id="<%= item.id %>">
+                <button class="delete-button" id="delete-btn" data-id="<%= item.id %>">
                   Delete
-                  <i class="fa-solid fa-trash-can"></i>
                 </button>
               </div>
             </div>
