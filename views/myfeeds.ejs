@@ -106,10 +106,10 @@
                             <% } %>
 
                             <% if (results[i].isSoldBtnActive) {%>
-                            <button type="button" class="btn" id="sold-btn" value="<%= results[i].id %>" id="sold_<%= results[i].id %>">Mark as
+                            <button type="button" class="btn btn-warning" value="<%= results[i].id %>" id="sold_<%= results[i].id %>">Mark as
                               sold</button>
                             <%} if (results[i].isSoldBtnActive) {%>
-                            <button type="button" class="btn" id="delete-btn" value="<%= results[i].id %>" id="del_<%= results[i].id %>">Delete</button>
+                              <button type="button" class="btn btn-danger" value="<%= results[i].id %>" id="del_<%= results[i].id %>">Delete</button>
                             <% } %>
 
                           </div>
