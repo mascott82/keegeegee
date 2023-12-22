@@ -6,7 +6,7 @@ CREATE TABLE item_listing (
   title VARCHAR(255) NOT NULL,
   price NUMERIC NOT NULL,
   image_url VARCHAR(255),
-  description TEXT,
+  description VARCHAR(255),
   is_available BOOLEAN,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
